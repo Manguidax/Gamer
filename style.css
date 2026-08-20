@@ -1,0 +1,172 @@
+/* Cores e Variáveis Oficiais Estilo Play Store */
+:root {
+    --google-green: #01875f;
+    --text-main: #202124;
+    --text-sub: #5f6368;
+    --bg-light: #ffffff;
+    --bg-gray: #f1f3f4;
+    --border-color: #e0e0e0;
+}
+
+body {
+    font-family: 'Roboto', 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--text-main);
+    background-color: var(--bg-light);
+    overflow-x: hidden;
+    padding-bottom: 80px; /* Espaço para o menu inferior */
+}
+
+/* Cabeçalho */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #fff;
+}
+
+.logo-title { font-size: 22px; margin: 0; font-weight: 500; }
+.sub-title { font-size: 14px; margin: 0; color: var(--google-green); font-weight: bold; }
+.yt-icon { transition: transform 0.2s; }
+.yt-icon:active { transform: scale(0.9); }
+
+/* Abas Superiores */
+.tabs {
+    display: flex;
+    padding: 0 10px;
+    border-bottom: 1px solid var(--border-color);
+    gap: 20px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 12px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-sub);
+    cursor: pointer;
+    position: relative;
+}
+
+.tab-btn.active {
+    color: var(--google-green);
+}
+
+.tab-btn.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--google-green);
+    border-radius: 3px 3px 0 0;
+}
+
+/* Carrossel de Destaque (Horizontal) */
+.hero-section { padding: 15px 0; }
+.hero-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding: 0 20px;
+    scrollbar-width: none; /* Esconde scroll no Firefox */
+}
+
+.hero-carousel::-webkit-scrollbar { display: none; } /* Esconde scroll no Chrome */
+
+.banner {
+    min-width: 85%;
+    height: 180px;
+    background: #444;
+    border-radius: 12px;
+    scroll-snap-align: center;
+    overflow: hidden;
+}
+
+.banner img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Lista Vertical (Sugeridos) */
+.section-container { padding: 20px; }
+.section-title { font-size: 18px; margin-bottom: 15px; font-weight: 500; }
+
+.vertical-list { display: flex; flex-direction: column; gap: 18px; }
+
+.game-item-v {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.game-logo {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    background: var(--bg-gray);
+    object-fit: cover;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.game-info { display: flex; flex-direction: column; }
+.game-name { font-weight: 500; font-size: 15px; }
+.game-meta { font-size: 12px; color: var(--text-sub); margin-top: 4px; }
+
+/* Carrossel Quadrado (Mais Jogados) */
+.horizontal-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding-bottom: 10px;
+}
+
+.game-item-h {
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    gap: 8px;
+}
+
+.game-item-h img {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    background: var(--bg-gray);
+    object-fit: cover;
+}
+
+/* Menu Inferior Fixo */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid var(--border-color);
+    z-index: 100;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    text-align: center;
+    color: var(--text-sub);
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.nav-btn span { font-size: 20px; }
+
+/* Estilo do Tradutor Google */
+#google_translate_element {
+    align-self: center;
+    max-width: 100px;
+    overflow: hidden;
+}
