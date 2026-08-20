@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mangui d'Dax Gamer Hub</title>
+    <style>
+        :root { --play-green: #01875f; --text-gray: #5f6368; }
+        body { font-family: 'Roboto', sans-serif; margin: 0; padding-bottom: 70px; background: #fff; color: #202124; overflow-x: hidden; }
+        header { padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .yt-icon { width: 35px; cursor: pointer; }
+        #google_translate_element { position: fixed; top: 15px; right: 15px; z-index: 10001; transform: scale(0.8); }
+
+        .top-nav { display: flex; gap: 20px; padding: 10px 15px; border-bottom: 1px solid #eee; overflow-x: auto; scrollbar-width: none; }
+        .nav-item { font-weight: 500; color: var(--text-gray); cursor: pointer; white-space: nowrap; }
+        .nav-item.active { color: var(--play-green); border-bottom: 3px solid var(--play-green); padding-bottom: 5px; }
+
+        .btn-instalar { background: var(--play-green); color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 13px; cursor: pointer; }
+
+        /* CARROSSEL TOPO */
+        .carousel-wrap { padding: 15px; overflow: hidden; position: relative; }
+        .carousel { display: flex; transition: transform 0.5s ease-in-out; }
+        .c-item { min-width: 100%; position: relative; cursor: pointer; }
+        .c-banner { width: 100%; height: 180px; border-radius: 15px; object-fit: cover; }
+        .c-overlay { display: flex; align-items: flex-end; padding: 0 15px; margin-top: -45px; gap: 12px; position: relative; z-index: 10; }
+        .c-capa { width: 85px; height: 85px; border-radius: 18px; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.3); object-fit: cover; background: #fff; }
+        .c-info { flex: 1; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .c-text h2 { margin: 0; font-size: 18px; color: #202124; }
+        .c-size { color: var(--play-green); font-weight: bold; font-size: 12px; display: block; }
+
+        /* LISTA SUGERIDOS */
+        .v-list { padding: 0 15px; }
+        .v-row { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; cursor: pointer; }
+        .v-row img { width: 64px; height: 64px; border-radius: 14px; object-fit: cover; }
+        .v-info { flex: 1; }
+        .v-info h4 { margin: 0; font-size: 14px; }
+        .v-info p { margin: 0; font-size: 12px; color: var(--text-gray); }
+
+        /* VÍDEOS COM NAVEGAÇÃO */
+        .yt-wrapper { position: relative; width: 100%; }
+        .yt-container { overflow: hidden; width: 100%; position: relative; }
+        .yt-scroll { display: flex; transition: transform 0.5s; }
+        .video-item { min-width: 100%; box-sizing: border-box; padding: 0 15px; cursor: pointer; }
+        .video-item img { width: 100%; border-radius: 12px; aspect-ratio: 16/9; object-fit: cover; }
+        .video-item p { font-size: 14px; margin-top: 8px; font-weight: 500; }
+        
+        .v-btn-nav {
+            position: absolute; top: 40%; transform: translateY(-50%);
+            background: rgba(0,0,0,0.6); color: white; border: none;
+            width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 10;
+            font-weight: bold; font-size: 20px; display: flex; align-items: center; justify-content: center;
+        }
+        .v-prev { left: 20px; }
+        .v-next { right: 20px; }
+
+        /* OUTROS ESTILOS */
+        .h-scroll { display: flex; overflow-x: auto; padding: 15px; gap: 15px; scrollbar-width: none; }
+        .sq-item { min-width: 110px; cursor: pointer; }
+        .sq-item img { width: 110px; height: 110px; border-radius: 20px; object-fit: cover; }
+        .sq-size { color: var(--play-green); font-size: 11px; font-weight: bold; display: block; margin-top: 8px; }
+        .sq-item small { display: block; margin: 2px 0 8px; font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        #search-box { display: none; padding: 10px 15px; background: #f1f3f4; }
+        #input-busca { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; outline: none; }
+        #menu-filtros { display: none; padding: 15px; background: #f8f9fa; }
+        .grid-filtros { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
+        .btn-filtro { padding: 12px; background: #fff; border: 1px solid #ddd; border-radius: 12px; text-align: center; font-size: 13px; cursor: pointer; }
+
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #eee; z-index: 100; }
+        .b-btn { background: none; border: none; color: var(--text-gray); font-size: 11px; flex: 1; text-align: center; cursor: pointer; }
+    </style>
+</head>
+<body onload="carregarConteudo()">
+
+    <div id="google_translate_element"></div>
+
+    <header>
+        <div><b style="color:var(--play-green); font-size:20px;">Mangui d'Dax</b><br><small>O Teu Universo Gamer</small></div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" class="yt-icon" onclick="window.open('https://youtube.com/@manguidx')">
+    </header>
+
+    <div id="search-box">
+        <input type="text" id="input-busca" placeholder="Pesquisar jogo..." onkeyup="filtrarPorBusca()">
+    </div>
+
+    <nav class="top-nav">
+        <span class="nav-item active" onclick="location.reload()">Para si</span>
+        <span class="nav-item" onclick="abrirMenu('categoria')">Categoria</span>
+        <span class="nav-item" onclick="abrirMenu('plataforma')">Plataformas</span>
+    </nav>
+
+    <div id="menu-filtros"><div class="grid-filtros" id="grid-filtros"></div></div>
+
+    <!-- 1. BANNER -->
+    <div id="secao-banner">
+        <div class="carousel-wrap">
+            <div class="carousel" id="slider"></div>
+        </div>
+    </div>
+
+    <!-- 2. SUGERIDOS -->
+    <h3 id="titulo-secao" style="padding: 15px; font-size: 16px; margin: 0;">Sugeridos para si</h3>
+    <div class="v-list" id="sugeridos-list"></div>
+
+    <!-- 3. MAIS JOGADOS -->
+    <div id="secao-mais-jogados">
+        <h3 style="padding: 15px; font-size: 16px; margin: 0;">Mais jogados</h3>
+        <div class="h-scroll" id="mais-jogados"></div>
+    </div>
+
+    <!-- 4. VÍDEOS COM CONTROLE DE NAVEGAÇÃO -->
+    <div id="secao-videos">
+        <h3 style="padding: 15px; font-size: 16px; margin: 0;">Vídeos em Destaque</h3>
+        <div class="yt-wrapper">
+            <button class="v-btn-nav v-prev" onclick="mudarVideo(-1)">&#10094;</button>
+            <div class="yt-container">
+                <div class="yt-scroll" id="canal-videos"></div>
+            </div>
+            <button class="v-btn-nav v-next" onclick="mudarVideo(1)">&#10095;</button>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <div class="b-btn" onclick="location.reload()"><br>Home</div>
+        <div class="b-btn" onclick="mostrarTodosJogos()"><br>Jogos</div>
+        <div class="b-btn" onclick="toggleSearch()"><br>Pesquisa</div>
+    </nav>
+
+    <script src="jogos.js"></script>
+    <script>
+        let bIdx = 0, vIdx = 0, videoCount = 0;
+        let vInterval;
+
+        function shuffleArray(array) {
+            if (!array) return [];
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function carregarConteudo() {
+            if (typeof games === 'undefined') return;
+            let pool = shuffleArray(games);
+
+            // Banner
+            const slider = document.getElementById('slider');
+            slider.innerHTML = "";
+            pool.slice(0,3).forEach(g => {
+                slider.innerHTML += `<div class="c-item" onclick="irPara('${g.id}')"><img src="${g.image}" class="c-banner"><div class="c-overlay"><img src="${g.image}" class="c-capa"><div class="c-info"><div class="c-text"><span class="c-size">${g.requirements?.storage || ''}</span><h2>${g.title}</h2></div><button class="btn-instalar">Instalar</button></div></div></div>`;
+            });
+
+            renderizarSugeridos(pool.slice(2, 5));
+
+            // Mais Jogados
+            const mj = document.getElementById('mais-jogados');
+            mj.innerHTML = "";
+            pool.slice(7,15 ).forEach(g => {
+                mj.innerHTML += `<div class="sq-item" onclick="irPara('${g.id}')"><img src="${g.image}"><span class="sq-size">${g.requirements?.storage || ''}</span><small>${g.title}</small><button class="btn-instalar" style="width:100%; padding:6px; font-size:11px;">Instalar</button></div>`;
+            });
+
+            // Vídeos
+            const vids = [
+    { id: "NdUlwdOpxLc", title: "The Walking Dead Season Two Android Atualizado (PT-BR)" },
+    { id: "Dz4e6X32vFk", title: "TEENY TITANS GO ATUALIZADO ANDROID 15 (APK+OBB)" },
+    { id: "7mZWKbDML64", title: "The Amazing Spider-Man 2 Atualizado no Android 15" },
+    { id: "J_k_qYGT_RE", title: "NBA 2K17 Mobile OFFLINE: Tutorial Completo APK+OBB" },
+    { id: "Qn6xAIdy2eQ", title: "Como Instalar The Walking Dead Season 1 no Android 15/16" },
+    { id: "XwCALyDLHiI", title: "Como Instalar The Walking Dead Season 3 no Android 15/16" },
+    { id: "kBRro1Ty_B8", title: "The Walking Dead: Final Season de PC no Android" },
+    { id: "tpXjBpEa464", title: "Need For Speed Most Wanted 2012 Limited Edition (PC no Android)" },
+    { id: "AS44ct7R1qs", title: "DAYS GONE DE PC PRÉ-INSTALADO NO ANDROID" },
+    { id: "wUTjQtGn-RM", title: "FIFA 16 De Pc Pré-installed No Android [Winlator]" },
+    { id: "h4qZ1C4uWQc", title: "JOGAR NFS MOST WANTED 2005 NO ANDROID (DOLPHIN)" },
+    { id: "bH-GW84WNvg", title: "SONIC UNLEASHED RECOMPILED NO ANDROID (APK + OBB)" },
+    { id: "jY5EAAV06tI", title: "Little Nightmares Mobile no Android (Tutorial)" },
+    { id: "GMh3-7hTRcs", title: "Batman the Dark Knight rise no android apk+OBB" },
+    { id: "zvc4MlnFyBU", title: "The Amazing Spider-Man 2 Atualizado Android APK+OBB" },
+    { id: "7glgp0bv6g0", title: "DRAGON BALL Z SUPER ATUALIZADO ANDROID (APK+OBB)" },
+    { id: "8PQaNKb2UCY", title: "ROBOCOP ATUALIZADO ANDROID (APK+OBB)" },
+    { id: "NaGdmCdoj4s", title: "Como Jogar Mortal Kombat Deadly Alliance no Android" },
+    { id: "XkkEcYW-PfA", title: "Naruto Clash of Ninja 2 no Android (Dolphin Emulador)" },
+    { id: "bGymDA-FDBY", title: "The Adventures of Tintins - Fix support for all android" }
+];
+            const cv = document.getElementById('canal-videos');
+            cv.innerHTML = "";
+            videoCount = vids.length;
+            vids.forEach(v => {
+                cv.innerHTML += `<div class="video-item" onclick="window.open('https://www.youtube.com/watch?v=${v.id}')"><img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg"><p>${v.title}</p></div>`;
+            });
+
+            // Iniciar Timers
+            setInterval(() => { bIdx = (bIdx + 1) % 3; slider.style.transform = `translateX(-${bIdx * 100}%)`; }, 4500);
+            startVideoTimer();
+        }
+
+        function mudarVideo(dir) {
+            vIdx += dir;
+            if (vIdx >= videoCount) vIdx = 0;
+            if (vIdx < 0) vIdx = videoCount - 1;
+            document.getElementById('canal-videos').style.transform = `translateX(-${vIdx * 100}%)`;
+            clearInterval(vInterval);
+            startVideoTimer();
+        }
+
+        function startVideoTimer() {
+            vInterval = setInterval(() => mudarVideo(1), 5000);
+        }
+
+        function renderizarSugeridos(lista) {
+            const container = document.getElementById('sugeridos-list');
+            container.innerHTML = "";
+            lista.forEach(g => {
+                container.innerHTML += `<div class="v-row" onclick="irPara('${g.id}')"><img src="${g.image}"><div class="v-info"><h4>${g.title}</h4><p>${g.platform} • <span style="color:var(--play-green);font-weight:bold;">${g.requirements?.storage || ''}</span></p></div><button class="btn-instalar">Instalar</button></div>`;
+            });
+        }
+
+        function abrirMenu(tipo) {
+            const grid = document.getElementById('grid-filtros');
+            document.getElementById('menu-filtros').style.display = 'block';
+            grid.innerHTML = "";
+            if(tipo === 'plataforma') {
+                const plats = [{n:"Android",i:""},{n:"PC",i:""},{n:"PS1",i:""},{n:"PS2",i:""},{n:"PSP",i:""},{n:"GameCube",i:""},{n:"Wii",i:""},{n:"Xbox",i:""},{n:"Nintendo",i:""}];
+                plats.forEach(p => grid.innerHTML += `<div class="btn-filtro" onclick="filtrar('platform', '${p.n}')">${p.i} ${p.n}</div>`);
+            } else {
+                ["Aventura","Ação","Corrida","Esportes","RPG","Terror"].forEach(c => grid.innerHTML += `<div class="btn-filtro" onclick="filtrar('category', '${c}')">${c}</div>`);
+            }
+        }
+
+        function filtrar(campo, valor) {
+            renderizarSugeridos(games.filter(g => g[campo] === valor));
+            document.getElementById('titulo-secao').innerText = "Jogos de " + valor;
+            document.getElementById('menu-filtros').style.display = 'none';
+            ['secao-banner', 'secao-mais-jogados', 'secao-videos'].forEach(id => document.getElementById(id).style.display = 'none');
+        }
+
+        function toggleSearch() { const s = document.getElementById('search-box'); s.style.display = s.style.display === 'block' ? 'none' : 'block'; }
+        function filtrarPorBusca() { renderizarSugeridos(games.filter(g => g.title.toLowerCase().includes(document.getElementById('input-busca').value.toLowerCase()))); ['secao-banner', 'secao-mais-jogados', 'secao-videos'].forEach(id => document.getElementById(id).style.display = 'none'); }
+        function mostrarTodosJogos() { renderizarSugeridos(games); document.getElementById('titulo-secao').innerText = "Todos os Jogos"; ['secao-banner', 'secao-mais-jogados', 'secao-videos'].forEach(id => document.getElementById(id).style.display = 'none'); }
+        function irPara(id) { localStorage.setItem('gameID', id); window.location.href = 'jogo.html'; }
+        function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt', autoDisplay: false}, 'google_translate_element'); }
+    </script>
+
+</body>
+</html>
