@@ -1,0 +1,181 @@
+/* Cores e Variáveis Oficiais Estilo Play Store */
+:root {
+    /* Modo Claro (Padrão) */
+    --google-green: #01875f;
+    --text-main: #202124;
+    --text-sub: #5f6368;
+    --bg-light: #ffffff;
+    --bg-gray: #f1f3f4;
+    --border-color: #e0e0e0;
+    --card-bg: #ffffff;
+}
+
+/* MODALIDADE MODO ESCURO (Injetada) */
+.dark-mode {
+    --google-green: #00d4ff; /* Azul Neon do Mangui Dx para destacar no preto */
+    --text-main: #e8eaed;
+    --text-sub: #9aa0a6;
+    --bg-light: #080a0c;
+    --bg-gray: #1e2124;
+    --border-color: #3c4043;
+    --card-bg: #111418;
+}
+
+body {
+    font-family: 'Roboto', 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--text-main);
+    background-color: var(--bg-light);
+    overflow-x: hidden;
+    padding-bottom: 90px; /* Espaço para o menu inferior ampliado */
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Cabeçalho */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: var(--bg-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-title { font-size: 22px; margin: 0; font-weight: 700; color: var(--text-main); }
+.sub-title { font-size: 13px; margin: 0; color: var(--google-green); font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Abas Superiores */
+.tabs {
+    display: flex;
+    padding: 0 10px;
+    border-bottom: 1px solid var(--border-color);
+    gap: 20px;
+    background: var(--bg-light);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 12px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-sub);
+    cursor: pointer;
+    position: relative;
+}
+
+.tab-btn.active { color: var(--google-green); }
+.tab-btn.active::after {
+    content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px;
+    background: var(--google-green); border-radius: 3px 3px 0 0;
+}
+
+/* Carrossel de Destaque */
+.hero-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding: 10px 20px;
+    scrollbar-width: none;
+}
+.hero-carousel::-webkit-scrollbar { display: none; }
+
+.banner {
+    min-width: 88%;
+    height: 190px;
+    border-radius: 16px;
+    scroll-snap-align: center;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+
+/* Sombra nas letras sobre imagens para visibilidade total */
+.banner-text {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: #fff;
+    text-shadow: 0px 2px 8px rgba(0,0,0,0.9);
+    font-weight: bold;
+}
+
+/* Lista Vertical (Sugeridos) */
+.section-title { 
+    font-size: 18px; 
+    padding: 0 20px;
+    margin: 20px 0 15px; 
+    font-weight: 700; 
+    color: var(--text-main);
+}
+
+.game-item-v {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.game-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: var(--bg-gray);
+    object-fit: cover;
+}
+
+.game-name { font-weight: 600; font-size: 15px; color: var(--text-main); }
+.game-meta { font-size: 12px; color: var(--text-sub); font-weight: 500; }
+
+/* Carrossel Quadrado (Mais Jogados) */
+.game-item-h {
+    min-width: 110px;
+    text-align: left;
+}
+
+.game-item-h img {
+    width: 110px;
+    height: 110px;
+    border-radius: 22px; /* Cantos Play Store */
+    background: var(--bg-gray);
+    border: 1px solid var(--border-color);
+}
+
+/* Menu Inferior Ampliado */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: var(--card-bg);
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    border-top: 1px solid var(--border-color);
+    z-index: 1000;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    text-align: center;
+    color: var(--text-sub);
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.nav-btn span { font-size: 24px; }
+.nav-btn.active { color: var(--google-green); }
+
+/* Ajuste Tradutor */
+#google_translate_element { display: none; }
