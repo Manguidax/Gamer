@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mangui Dx Hub</title>
+    <style>
+        :root { --bg: #f1f3f4; --card: #ffffff; --border: #dadce0; --text: #202124; --green: #01875f; --yt-red: #ff0000; }
+        .dark-mode { --bg: #080a0c; --card: #111418; --border: #1e242b; --text: #ffffff; --green: #3b82f6; }
+        
+        body { font-family: 'Roboto', sans-serif; margin: 0; padding-bottom: 95px; background: var(--bg); color: var(--text); transition: 0.3s; overflow-x: hidden; }
+
+        header { display: grid; grid-template-columns: auto 1fr auto; align-items: center; padding: 12px 15px; background: var(--card); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border); gap: 10px; }
+        .search-box { display: flex; align-items: center; background: var(--bg); border-radius: 25px; padding: 6px 15px; border: 1px solid var(--border); }
+        .search-box input { width: 100%; border: none; background: none; color: var(--text); outline: none; font-size: 15px; }
+
+        .sub-nav { display: flex; gap: 18px; padding: 12px 15px; background: var(--card); border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+        .sub-item { font-size: 14px; font-weight: bold; color: #5f6368; white-space: nowrap; cursor: pointer; text-transform: uppercase; }
+
+        /* CAROUSEL */
+        .carousel-wrap { padding: 15px; overflow: hidden; position: relative; }
+        .carousel { display: flex; transition: transform 0.5s ease-in-out; }
+        .c-item { min-width: 100%; position: relative; border-radius: 20px; overflow: hidden; height: 210px; cursor: pointer; }
+        .c-bg { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
+        .c-cartaz { position: absolute; bottom: 15px; left: 15px; right: 15px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(12px); padding: 12px; border-radius: 15px; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        .c-logo { width: 50px; height: 50px; border-radius: 10px; border: 2px solid #fff; object-fit: cover; }
+        .c-plat { background: var(--green); color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 5px; font-weight: bold; text-transform: uppercase; margin-bottom: 3px; display: inline-block; }
+        .c-title { color: #fff; font-size: 16px; font-weight: bold; display: block; }
+
+        /* LISTS */
+        .pop-img { width: 130px; height: 130px; border-radius: 22px; object-fit: cover; border: 1px solid var(--border); }
+        .sug-img { width: 65px; height: 65px; border-radius: 14px; object-fit: cover; }
+
+        /* POPUPS */
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 5000; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+        .modal { background: var(--card); width: 90%; max-width: 400px; border-radius: 25px; padding: 20px; max-height: 80vh; display: flex; flex-direction: column; }
+        .grid-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; overflow-y: auto; padding: 10px 0; }
+        .opt-btn { padding: 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-weight: bold; cursor: pointer; text-transform: capitalize; }
+
+        /* RESULTS GRID */
+        .results-list { overflow-y: auto; flex: 1; text-align: left; }
+        .res-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; cursor: pointer; }
+
+        .yt-section { background: var(--yt-red); padding: 25px 15px; margin-top: 25px; color: #fff; text-align: center; }
+        .btn-yt { background: #fff; color: var(--yt-red); border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: var(--card); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid var(--border); height: 75px; z-index: 1000; }
+        .b-btn { background: none; border: none; color: #5f6368; font-size: 11px; font-weight: bold; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; }
+        .b-btn span { font-size: 22px; }
+
+        #google_translate_element { display: none !important; }
+    </style>
+</head>
+<body onload="carregarTudo()">
+
+    <header>
+        <b style="color:var(--green); font-size:20px;">Mangui Dx</b>
+        <div class="search-box">
+            <input type="text" id="top-search" placeholder="Search games..." onkeypress="if(event.key==='Enter') buscar(this.value)">
+            <button onclick="buscar(document.getElementById('top-search').value)" style="background:none; border:none;">🔍</button>
+        </div>
+        <button onclick="document.body.classList.toggle('dark-mode')" style="background:none; border:none; font-size:22px;">🌓</button>
+    </header>
+
+    <nav class="sub-nav">
+        <span class="sub-item" onclick="location.reload()">For You</span>
+        <span class="sub-item" onclick="mostrarFiltro('category')">Categories</span>
+        <span class="sub-item" onclick="mostrarFiltro('platform')">Platforms</span>
+        <span class="sub-item" onclick="abrirIdiomas()">Language</span>
+    </nav>
+
+    <div class="carousel-wrap">
+        <div class="carousel" id="slider"></div>
+    </div>
+
+    <h3 style="padding:0 15px; font-size:18px; color:var(--green);">Recommended for you</h3>
+    <div id="main-list" style="padding:0 15px;"></div>
+
+    <h3 style="padding:15px; font-size:18px; color:var(--green);">Top Charts</h3>
+    <div style="display: flex; overflow-x: auto; padding: 0 15px 15px 15px; gap: 15px; scrollbar-width: none;" id="pop-list"></div>
+
+    <!-- POPUP FILTERS & RESULTS -->
+    <div id="res-popup" class="overlay">
+        <div class="modal">
+            <h3 id="res-title">Results</h3>
+            <div id="res-content" class="results-list"></div>
+            <button onclick="fecharPopups()" style="margin-top:15px; color:var(--green); border:none; background:none; font-weight:bold; cursor:pointer;">CLOSE</button>
+        </div>
+    </div>
+
+    <!-- LANGUAGE POPUP -->
+    <div id="lang-popup" class="overlay">
+        <div class="modal">
+            <h3>Select Language</h3>
+            <div class="grid-options">
+                <button class="opt-btn" onclick="setLang('pt')">🇧🇷 PT</button>
+                <button class="opt-btn" onclick="setLang('en')">🇺🇸 EN</button>
+                <button class="opt-btn" onclick="setLang('es')">🇪🇸 ES</button>
+                <button class="opt-btn" onclick="setLang('fr')">🇫🇷 FR</button>
+            </div>
+            <button onclick="fecharPopups()" style="margin-top:15px; color:var(--green); border:none; background:none; font-weight:bold;">CLOSE</button>
+        </div>
+    </div>
+
+    <div class="yt-section">
+        <h2>CHANNEL VIDEOS</h2>
+        <div id="yt-content"></div>
+        <button class="btn-yt" onclick="window.open('https://youtube.com/@manguidx')">YouTube Channel</button>
+    </div>
+
+    <nav class="bottom-nav">
+        <button class="b-btn" onclick="location.reload()"><span>🏠</span>HOME</button>
+        <button class="b-btn" onclick="abrirResultados('All Games', games)"><span>🎮</span>GAMES</button>
+        <button class="b-btn" onclick="window.open('https://youtube.com/@manguidx')"><span>👤</span>PROFILE</button>
+    </nav>
+
+    <div id="google_translate_element"></div>
+    <script src="jogos.js"></script>
+    <script>
+        let sIdx = 0;
+        const canalVids = [
+            {id: "CtvMlBuVnuY", t: "Spider-Man 2"}, 
+            {id: "m3ZYASNe2mE", t: "Cars Fast"}, 
+            {id: "AOpGdgE4yVA", t: "Oddworld"}
+        ];
+
+        // Tradução simples para as categorias e plataformas
+        const dict = {
+            "ação": "Action",
+            "aventura": "Adventure",
+            "corrida": "Racing",
+            "esporte": "Sports",
+            "estratégia": "Strategy",
+            "simulação": "Simulation"
+        };
+
+        function translate(text) {
+            return dict[text.toLowerCase()] || text;
+        }
+
+        function carregarTudo() {
+            if(!sessionStorage.getItem('lang-ok')) abrirIdiomas();
+            if(typeof games === 'undefined') return;
+            const shuf = [...games].sort(() => 0.5 - Math.random());
+            
+            const s = document.getElementById('slider');
+            shuf.slice(0,3).forEach(g => {
+                s.innerHTML += `
+                <div class="c-item" onclick="window.location.href='jogo.html?id=${g.id}'">
+                    <img src="${g.image}" class="c-bg">
+                    <div class="c-cartaz">
+                        <img src="${g.image}" class="c-logo">
+                        <div><span class="c-plat">${translate(g.platform)}</span><span class="c-title">${g.title}</span></div>
+                    </div>
+                </div>`;
+            });
+            setInterval(() => { sIdx=(sIdx+1)%3; s.style.transform=`translateX(-${sIdx*100}%)`; }, 5000);
+
+            document.getElementById('main-list').innerHTML = shuf.slice(3,10).map(g => `
+                <div class="res-item" onclick="window.location.href='jogo.html?id=${g.id}'">
+                    <img src="${g.image}" class="sug-img">
+                    <div style="flex:1;"><b style="font-size:15px;">${g.title}</b><br><small>${translate(g.platform)}</small></div>
+                    <button style="background:var(--green); color:#fff; border:none; padding:6px 12px; border-radius:8px; font-weight:bold;">INSTALL</button>
+                </div>`).join('');
+
+            const pop = document.getElementById('pop-list');
+            shuf.slice(10,20).forEach(g => {
+                pop.innerHTML += `<div style="min-width:130px; text-align:left;" onclick="window.location.href='jogo.html?id=${g.id}'"><img src="${g.image}" class="pop-img"><div style="font-size:12px; font-weight:500; margin-top:5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${g.title}</div></div>`;
+            });
+
+            trocarVideoYT();
+        }
+
+        function abrirResultados(titulo, lista) {
+            document.getElementById('res-title').innerText = translate(titulo);
+            const content = document.getElementById('res-content');
+            content.innerHTML = lista.map(g => `
+                <div class="res-item" onclick="window.location.href='jogo.html?id=${g.id}'">
+                    <img src="${g.image}" style="width:50px; height:50px; border-radius:10px;">
+                    <div><b>${g.title}</b><br><small>${translate(g.platform)}</small></div>
+                </div>`).join('');
+            document.getElementById('res-popup').style.display = 'flex';
+        }
+
+        function mostrarFiltro(tipo) {
+            const itens = [...new Set(games.map(g => g[tipo]))];
+            document.getElementById('res-title').innerText = tipo === 'category' ? 'Categories' : 'Platforms';
+            const content = document.getElementById('res-content');
+            content.innerHTML = `<div class="grid-options">` + itens.map(item => `
+                <button class="opt-btn" onclick="filtrar('${tipo}', '${item}')">${translate(item)}</button>`).join('') + `</div>`;
+            document.getElementById('res-popup').style.display = 'flex';
+        }
+
+        function filtrar(tipo, valor) {
+            const filtrados = games.filter(g => g[tipo] === valor);
+            abrirResultados(valor, filtrados);
+        }
+
+        function buscar(val) {
+            const term = val.toLowerCase();
+            const res = games.filter(g => g.title.toLowerCase().includes(term) || g.category.toLowerCase().includes(term));
+            abrirResultados('Search: ' + val, res);
+        }
+
+        function trocarVideoYT() {
+            const v = canalVids[Math.floor(Math.random() * canalVids.length)];
+            document.getElementById('yt-content').innerHTML = `<img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" style="width:100%; border-radius:15px; margin-bottom:10px;" onclick="window.open('https://youtube.com/watch?v=${v.id}')"><b>${v.t}</b>`;
+        }
+
+        function abrirIdiomas() { document.getElementById('lang-popup').style.display='flex'; }
+        function fecharPopups() { document.querySelectorAll('.overlay').forEach(p => p.style.display='none'); }
+        function setLang(l) { const combo = document.querySelector('.goog-te-combo'); if(combo) { combo.value = l; combo.dispatchEvent(new Event('change')); } sessionStorage.setItem('lang-ok', 't'); fecharPopups(); }
+
+        function googleTranslateElementInit(){ new google.translate.TranslateElement({pageLanguage:'en'},'google_translate_element'); }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
