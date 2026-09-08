@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details - Mangui Dx</title>
+    <style>
+        :root {
+            --bg: #f1f3f4;
+            --card: #ffffff;
+            --border: #dadce0;
+            --text: #202124;
+            --green: #01875f;
+            --yt-red: #ff0000;
+        }
+        .dark-mode {
+            --bg: #080a0c;
+            --card: #111418;
+            --border: #1e242b;
+            --text: #ffffff;
+            --green: #3b82f6;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            padding-bottom: 50px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: var(--text);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .movie-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .banner-wrap {
+            position: relative;
+            width: 100%;
+            height: 250px;
+        }
+
+        .movie-banner {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .movie-content {
+            padding: 20px;
+        }
+
+        .tag {
+            background: var(--green);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-right: 6px;
+            margin-bottom: 10px;
+        }
+
+        .movie-title {
+            font-size: 22px;
+            margin: 0 0 15px 0;
+            font-weight: bold;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            background: var(--bg);
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .info-grid div span {
+            color: #777;
+            display: block;
+            font-size: 11px;
+        }
+
+        .synopsis {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text);
+            margin-bottom: 25px;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 15px;
+            box-sizing: border-box;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-download {
+            background: var(--green);
+            color: #fff;
+        }
+
+        .btn-watch {
+            background: transparent;
+            border: 2px solid var(--green);
+            color: var(--green);
+        }
+
+        /* TUTORIALS SECTION */
+        .tutorial-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .tutorial-title {
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .video-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .video-wrapper:last-child {
+            margin-bottom: 0;
+        }
+
+        .video-label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #000;
+            margin-bottom: 10px;
+        }
+
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .tutorial-steps {
+            background: var(--bg);
+            padding: 12px 15px;
+            border-radius: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+
+        .tutorial-steps ol {
+            margin: 5px 0 0 0;
+            padding-left: 18px;
+        }
+
+        /* HORIZONTAL RECOMMENDED MOVIES */
+        .rec-section {
+            margin-top: 25px;
+        }
+
+        .rec-header {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .rec-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 12px;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .rec-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .rec-card {
+            min-width: 130px;
+            max-width: 130px;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text);
+            flex-shrink: 0;
+        }
+
+        .rec-img {
+            width: 130px;
+            height: 180px;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            display: block;
+        }
+
+        .rec-name {
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .rec-sub {
+            font-size: 11px;
+            color: #777;
+        }
+
+        /* LANGUAGE POPUP OVERLAY */
+        .overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.8); 
+            z-index: 5000; 
+            align-items: center; 
+            justify-content: center; 
+            backdrop-filter: blur(5px); 
+        }
+        
+        .modal { 
+            background: var(--card); 
+            width: 90%; 
+            max-width: 400px; 
+            border-radius: 25px; 
+            padding: 20px; 
+            max-height: 80vh; 
+            display: flex; 
+            flex-direction: column; 
+        }
+
+        .grid-options { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+            overflow-y: auto; 
+            padding: 10px 0; 
+        }
+
+        .opt-btn { 
+            padding: 12px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border); 
+            background: var(--bg); 
+            color: var(--text); 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 14px;
+        }
+
+        #google_translate_element { display: none !important; }
+
+        .not-found {
+            text-align: center;
+            padding: 50px 20px;
+        }
+    </style>
+</head>
+<body onload="initPage()">
+
+    <header>
+        <button class="back-btn" onclick="window.location.href='index.html'">← Back</button>
+        <b style="color:var(--green); font-size:18px;">Mangui Dx Hub</b>
+        <div style="display:flex; align-items:center; gap:8px;">
+            <button onclick="openLanguages()" style="background:none; border:none; font-size:20px; cursor:pointer;" title="Change Language">🌐</button>
+            <button onclick="document.body.classList.toggle('dark-mode')" style="background:none; border:none; font-size:20px; cursor:pointer;">🌓</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- MOVIE CARD -->
+        <div id="movie-details"></div>
+
+        <!-- TWO-STEP VIDEO TUTORIALS -->
+        <div class="tutorial-box">
+            <h3 class="tutorial-title">📖 Video Tutorials & Instructions</h3>
+            
+            <!-- VIDEO 1 -->
+<div class="video-wrapper">
+    <div class="video-label">🎥 Step 1: How to Pass Linkvertise</div>
+    <div class="video-responsive">
+        <iframe 
+            src="https://www.youtube.com/embed/0bMlw7H3U2k"
+            title="How to Pass Linkvertise"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+
+<!-- VIDEO 2 -->
+<div class="video-wrapper">
+    <div class="video-label">🎥 Step 2: How to Download On Filespayout</div>
+    <div class="video-responsive">
+        <iframe 
+            src="https://www.youtube.com/embed/fhgoyvyPGvk"
+            title="How to Download After Linkvertise"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+        </div>
+
+        <!-- HORIZONTAL RECOMMENDED MOVIES -->
+        <div class="rec-section">
+            <div class="rec-header">
+                <span>Recommended Movies ↔️</span>
+            </div>
+            <div class="rec-carousel" id="recommended-list"></div>
+        </div>
+    </div>
+
+    <!-- LANGUAGE POPUP -->
+    <div id="lang-popup" class="overlay">
+        <div class="modal">
+            <h3 style="margin-top:0;">Select Language</h3>
+            <div class="grid-options">
+                <button class="opt-btn" onclick="setLang('en')">🇺🇸 English</button>
+                <button class="opt-btn" onclick="setLang('pt')">🇧🇷 Português</button>
+                <button class="opt-btn" onclick="setLang('es')">🇪🇸 Español</button>
+                <button class="opt-btn" onclick="setLang('fr')">🇫🇷 Français</button>
+            </div>
+            <button onclick="closePopups()" style="margin-top:15px; color:var(--green); border:none; background:none; font-weight:bold; cursor:pointer;">CLOSE</button>
+        </div>
+    </div>
+
+    <div id="google_translate_element"></div>
+
+    <script src="filmes.js"></script>
+    <script>
+        function initPage() {
+            if (!sessionStorage.getItem('lang-ok')) {
+                openLanguages();
+            }
+            loadMovie();
+        }
+
+        function loadMovie() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const movieId = urlParams.get('id');
+            const container = document.getElementById('movie-details');
+
+            if (typeof movies === 'undefined' || !movieId) {
+                container.innerHTML = `<div class="not-found"><h2>Movie not found!</h2><a href="index.html" style="color:var(--green);">Back to Home</a></div>`;
+                return;
+            }
+
+            const movie = movies.find(m => m.id === movieId);
+
+            if (!movie) {
+                container.innerHTML = `<div class="not-found"><h2>Movie not found!</h2><a href="index.html" style="color:var(--green);">Back to Home</a></div>`;
+                return;
+            }
+
+            // Render current movie
+            container.innerHTML = `
+                <div class="movie-card">
+                    <div class="banner-wrap">
+                        <img src="${movie.image}" alt="${movie.title}" class="movie-banner">
+                    </div>
+                    <div class="movie-content">
+                        <div>
+                            <span class="tag">${movie.category || 'Movie'}</span>
+                            <span class="tag" style="background:#444;">${movie.year || '2024'}</span>
+                        </div>
+                        <h1 class="movie-title">${movie.title}</h1>
+                        
+                        <div class="info-grid">
+                            <div><span>Genre:</span> <b>${movie.genre || '-'}</b></div>
+                            <div><span>Duration:</span> <b>${movie.duration || '-'}</b></div>
+                            <div><span>Quality:</span> <b>${movie.quality || 'HD'}</b></div>
+                            <div><span>Size:</span> <b>${movie.size || '-'}</b></div>
+                            <div style="grid-column: span 2;"><span>Audio / Language:</span> <b>${movie.audio || 'English'}</b></div>
+                        </div>
+
+                        <h3 style="font-size:16px; margin-bottom:8px;">Synopsis</h3>
+                        <p class="synopsis">${movie.synopsis || 'No synopsis available.'}</p>
+
+                        <div class="actions">
+                            ${movie.downloadLink ? `<a href="${movie.downloadLink}" target="_blank" class="btn-action btn-download">⬇ DOWNLOAD MOVIE</a>` : ''}
+                            ${movie.watchLink ? `<a href="${movie.watchLink}" target="_blank" class="btn-action btn-watch">▶ WATCH ONLINE</a>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Render horizontal recommendations
+            loadRecommended(movieId);
+        }
+
+        function loadRecommended(currentId) {
+            const recContainer = document.getElementById('recommended-list');
+            if (typeof movies === 'undefined') return;
+
+            const otherMovies = movies.filter(m => m.id !== currentId);
+            const shuffled = [...otherMovies].sort(() => 0.5 - Math.random());
+
+            recContainer.innerHTML = shuffled.map(item => `
+                <div class="rec-card" onclick="window.location.href='filmes.html?id=${item.id}'">
+                    <img src="${item.image}" alt="${item.title}" class="rec-img">
+                    <div class="rec-name">${item.title}</div>
+                    <div class="rec-sub">${item.quality || item.year || 'HD'}</div>
+                </div>
+            `).join('');
+        }
+
+        function openLanguages() { 
+            document.getElementById('lang-popup').style.display = 'flex'; 
+        }
+
+        function closePopups() { 
+            document.querySelectorAll('.overlay').forEach(p => p.style.display = 'none'); 
+        }
+
+        function setLang(l) { 
+            const combo = document.querySelector('.goog-te-combo'); 
+            if (combo) { 
+                combo.value = l; 
+                combo.dispatchEvent(new Event('change')); 
+            } 
+            sessionStorage.setItem('lang-ok', 't'); 
+            closePopups(); 
+        }
+
+        function googleTranslateElementInit(){ 
+            new google.translate.TranslateElement({pageLanguage:'en'}, 'google_translate_element'); 
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
