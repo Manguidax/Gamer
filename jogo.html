@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mangui Dx - Game Details</title>
+
+    <style>
+        :root {
+            --bg-main: #0a0d14;
+            --bg-card: #131924;
+            --bg-card-hover: #1b2332;
+            --border: #202b3c;
+            --accent: #00ff88;
+            --accent-glow: rgba(0, 255, 136, 0.25);
+            --pill-active: rgba(0, 255, 136, 0.15);
+            --text-main: #ffffff;
+            --text-sub: #8292a6;
+            --accent-blue: #29b6f6;
+            --accent-pink: #ff4081;
+            --accent-red: #ff4444;
+            --accent-red-glow: rgba(255, 68, 68, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-main);
+            padding-bottom: 85px;
+            overflow-x: hidden;
+            top: 0px !important;
+        }
+
+        .goog-te-banner-frame.skiptranslate, #goog-gt-tt {
+            display: none !important;
+        }
+        .goog-text-highlight {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .svg-icon {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .flag-svg {
+            width: 24px;
+            height: 16px;
+            border-radius: 3px;
+            flex-shrink: 0;
+            box-shadow: 0 0 3px rgba(0,0,0,0.4);
+            display: inline-block;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: rgba(10, 13, 20, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .header-btn:active {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        /* HERO SECTION */
+        .game-hero {
+            padding: 18px 16px 14px;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .game-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 18px;
+            object-fit: cover;
+            border: 2px solid var(--border);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+            flex-shrink: 0;
+            background: var(--bg-card);
+        }
+
+        .hero-info h1 {
+            font-size: 19px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .hero-info .author {
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .hero-info .gpu-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(41, 182, 246, 0.15);
+            color: var(--accent-blue);
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(41, 182, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        /* STATS ROW */
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 14px;
+            margin: 0 16px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .stat-item {
+            flex: 1;
+        }
+
+        .stat-item:not(:last-child) {
+            border-right: 1px solid var(--border);
+        }
+
+        .stat-val {
+            display: block;
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: var(--text-sub);
+            margin-top: 2px;
+        }
+
+        /* BOTÃO DE DOWNLOAD COM ANIMAÇÕES */
+        .btn-download-wrap {
+            padding: 0 16px;
+            margin: 14px 0 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-download {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            width: 100%;
+            max-width: 280px;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 22px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 3px 12px var(--accent-glow);
+            transition: all 0.3s ease;
+        }
+
+        .btn-download.detecting {
+            background: var(--bg-card-hover) !important;
+            color: var(--accent-blue) !important;
+            border: 1px solid var(--accent-blue);
+            box-shadow: 0 0 16px rgba(41, 182, 246, 0.25);
+            cursor: wait;
+            pointer-events: none;
+        }
+
+        .btn-download.loading {
+            background: var(--bg-card-hover) !important;
+            color: var(--accent) !important;
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 16px rgba(0, 255, 136, 0.3);
+            cursor: wait;
+            pointer-events: none;
+        }
+
+        .btn-progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent-blue);
+            width: 0%;
+            transition: width 0.05s linear;
+        }
+
+        .spinner-icon {
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(41, 182, 246, 0.2);
+            border-top-color: var(--accent-blue);
+            border-radius: 50%;
+            animation: spinBtn 0.7s linear infinite;
+            display: none;
+        }
+
+        .btn-download.loading .spinner-icon {
+            border-color: rgba(0, 255, 136, 0.2);
+            border-top-color: var(--accent);
+        }
+
+        .btn-download.loading .btn-progress-bar {
+            background: var(--accent);
+        }
+
+        @keyframes spinBtn {
+            to { transform: rotate(360deg); }
+        }
+
+        /* DOWNLOAD HUB */
+        #download-hub {
+            display: none;
+            padding: 0 16px 14px;
+        }
+
+        .download-notice {
+            text-align: center;
+            color: var(--accent-blue);
+            font-size: 11px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ALERTA DE INCOMPATIBILIDADE DE GPU */
+        .gpu-warning-box {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1.5px solid var(--accent-red);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            box-shadow: 0 4px 14px var(--accent-red-glow);
+        }
+
+        .gpu-warning-title {
+            color: var(--accent-red);
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+        }
+
+        .gpu-warning-desc {
+            color: #ffb4b4;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        /* CARDS DE DOWNLOAD */
+        .link-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .link-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .link-tag {
+            font-size: 11px;
+            color: var(--text-sub);
+            margin-top: 2px;
+        }
+
+        .download-btn-link {
+            text-decoration: none;
+            background: var(--accent);
+            color: #000;
+            font-weight: 800;
+            font-size: 11px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
+        }
+
+        /* TAGS DE SINALIZAÇÃO */
+        .badge-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .badge-recommended {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--accent);
+            border: 1px solid rgba(0, 255, 136, 0.4);
+        }
+
+        .badge-subtitle {
+            background: rgba(255, 64, 129, 0.2);
+            color: var(--accent-pink);
+            border: 1px solid rgba(255, 64, 129, 0.4);
+        }
+
+        .badge-blocked {
+            background: rgba(255, 68, 68, 0.2);
+            color: var(--accent-red);
+            border: 1px solid rgba(255, 68, 68, 0.4);
+        }
+
+        /* CARD DESTAQUE: GPU DETECTADA */
+        .card-recommended {
+            border: 2px solid var(--accent) !important;
+            background: rgba(0, 255, 136, 0.08) !important;
+            transform: scale(1.02);
+            box-shadow: 0 4px 18px var(--accent-glow);
+            opacity: 1 !important;
+            filter: none !important;
+        }
+
+        /* CARD DESTAQUE: LEGENDA / TRADUÇÃO */
+        .card-subtitle {
+            border: 1.5px solid var(--accent-pink) !important;
+            background: rgba(255, 64, 129, 0.08) !important;
+            opacity: 1 !important;
+            filter: none !important;
+        }
+
+        /* DESFOQUE NAS OUTRAS GPUS */
+        .link-card.card-blurred {
+            opacity: 0.15;
+            filter: blur(5px);
+            user-select: none;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+
+        /* QUANDO O USUÁRIO DESBLOQUEIA TODAS AS GPUS */
+        .show-all-gpus .link-card.card-blurred {
+            opacity: 0.85 !important;
+            filter: blur(0px) !important;
+            user-select: auto !important;
+            transform: scale(1) !important;
+            pointer-events: auto !important;
+        }
+
+        .show-all-gpus .link-card.card-blurred:hover {
+            opacity: 1 !important;
+            border-color: var(--accent-blue);
+        }
+
+        /* BOTÃO MOSTRAR OUTRAS GPUS */
+        .toggle-gpus-btn {
+            background: var(--bg-card);
+            border: 1px dashed var(--border);
+            color: var(--text-sub);
+            width: 100%;
+            padding: 9px 14px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 6px;
+            transition: all 0.2s;
+        }
+
+        .toggle-gpus-btn:hover, .toggle-gpus-btn:active {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        /* SECTIONS */
+        .section-box {
+            padding: 14px 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .desc-text {
+            color: var(--text-sub);
+            line-height: 1.5;
+            font-size: 13px;
+        }
+
+        /* TECH SPECS */
+        .tech-box {
+            background: var(--bg-card);
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tech-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        .tech-item span:last-child {
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        /* VIDEOS */
+        .video-wrapper {
+            margin-bottom: 14px;
+            background: var(--bg-card);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .video-tag {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .video-wrapper iframe {
+            width: 100%;
+            height: 185px;
+            border-radius: 10px;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        /* RELATED GAMES */
+        .rel-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding-bottom: 6px;
+            scrollbar-width: none;
+        }
+        .rel-scroll::-webkit-scrollbar { display: none; }
+
+        .rel-card {
+            min-width: 110px;
+            max-width: 110px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .rel-card img {
+            width: 100%;
+            height: 95px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .rel-card .rel-name {
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* MODAL IDIOMAS */
+        .overlay-lang {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+        }
+
+        .modal-lang {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            width: 88%;
+            max-width: 380px;
+            border-radius: 18px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lang-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .lang-btn {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .modal-close {
+            margin-top: 14px;
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        /* BOTTOM NAV */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 64px;
+            background: rgba(10, 13, 20, 0.96);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-sub);
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            flex: 1;
+            text-decoration: none;
+        }
+
+        .nav-icon-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 26px;
+            border-radius: 13px;
+            transition: 0.2s;
+        }
+
+        .nav-btn.active .nav-icon-wrap {
+            background: var(--pill-active);
+            color: var(--accent);
+        }
+
+        .nav-btn.active {
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body onload="main()">
+
+    <div id="google_translate_element" style="display:none;"></div>
+
+    <!-- HEADER -->
+    <header>
+        <button class="header-btn" onclick="history.back()" aria-label="Back">
+            <svg class="svg-icon" viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </button>
+
+        <div class="header-title">Mangui Dx Hub</div>
+
+        <button class="header-btn" onclick="abrirPopupLang()" aria-label="Language">
+            <svg class="svg-icon" viewBox="0 0 24 24">
+                <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+            </svg>
+        </button>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="game-hero">
+        <img id="g-img" src="" class="game-icon" alt="Game Icon">
+        <div class="hero-info">
+            <h1 id="g-title">Loading...</h1>
+            <div class="author">Mangui Dx • Official</div>
+            <span id="gpu-label" class="gpu-tag">
+                <svg class="svg-icon" style="width:14px; height:14px;" viewBox="0 0 24 24">
+                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/>
+                </svg>
+                <span id="gpu-tag-text">Scanning GPU...</span>
+            </span>
+        </div>
+    </section>
+
+    <!-- STATS ROW -->
+    <div class="stats-row">
+        <div class="stat-item">
+            <span class="stat-val">4.9 ★</span>
+            <span class="stat-label">Rating</span>
+        </div>
+        <div class="stat-item">
+            <span id="g-size" class="stat-val">---</span>
+            <span class="stat-label">Storage</span>
+        </div>
+        <div class="stat-item">
+            <span id="g-android" class="stat-val">---</span>
+            <span class="stat-label">Android</span>
+        </div>
+    </div>
+
+    <!-- BOTÃO DOWNLOAD -->
+    <div class="btn-download-wrap">
+        <button class="btn-download detecting" id="btn-main" onclick="triggerDL()">
+            <div class="spinner-icon" id="btn-spinner" style="display:inline-block;"></div>
+            <svg class="svg-icon" id="btn-icon" viewBox="0 0 24 24" style="fill:#000; display:none;">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+            </svg>
+            <span id="btn-text">Detecting GPU...</span>
+            <div class="btn-progress-bar" id="btn-progress"></div>
+        </button>
+    </div>
+
+    <!-- DOWNLOAD HUB -->
+    <div id="download-hub">
+        <div class="download-notice">★ Downloads & Files ★</div>
+        <div id="links-box"></div>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <div class="section-box">
+        <div class="section-title">About this game</div>
+        <p id="g-desc" class="desc-text"></p>
+
+        <div class="tech-box">
+            <div class="tech-item">
+                <span>Min. Requirement:</span>
+                <span id="req-android">---</span>
+            </div>
+            <div class="tech-item">
+                <span>Recommended RAM:</span>
+                <span id="req-ram">---</span>
+            </div>
+            <div class="tech-item">
+                <span>Detected GPU:</span>
+                <span id="my-gpu" style="color:var(--accent-blue);">Scanning...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- TUTORIALS / GAMEPLAY SECTION -->
+    <div class="section-box" id="media-section">
+        <div class="section-title">Tutorial & Gameplay</div>
+
+        <div class="video-wrapper">
+            <div class="video-tag" style="color:var(--accent-pink);">
+                <svg class="svg-icon" style="width:16px; height:16px; color:var(--accent-pink);" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                </svg>
+                <span>How to download / bypass links</span>
+            </div>
+            <iframe src="https://www.youtube.com/embed/0bMlw7H3U2k" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- RELATED GAMES -->
+    <div class="section-box" style="border-bottom:none;">
+        <div class="section-title">Related Games</div>
+        <div class="rel-scroll" id="rel-box"></div>
+    </div>
+
+    <!-- MODAL IDIOMAS -->
+    <div id="popup-lang" class="overlay-lang">
+        <div class="modal-lang">
+            <h3 style="font-size:15px; font-weight:800;">Choose Language</h3>
+            <p style="font-size:12px; color:var(--text-sub); margin-top:2px;">Select your language / Selecione o idioma</p>
+            
+            <div class="lang-grid">
+                <button class="lang-btn" onclick="setLang('en')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#012169" d="M0 0h640v480H0z"/>
+                        <path fill="#FFF" d="m75 0 245 180L565 0h75v60L435 240l205 180v60h-75L320 300 75 480H0v-60l205-180L0 60V0h75z"/>
+                        <path fill="#C8102E" d="m424 288 216 158v34h-46L378 318zm141-288L354 158l22 30 240-176h-51zM0 446l216-158-22-30L0 412v34zm0-412L216 192l22-30L46 0H0v34z"/>
+                        <path fill="#FFF" d="M240 0h160v480H240zM0 160h640v160H0z"/>
+                        <path fill="#C8102E" d="M280 0h80v480h-80zM0 200h640v80H0z"/>
+                    </svg>
+                    <span>English</span>
+                </button>
+
+                <button class="lang-btn" onclick="setLang('pt')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#009c3b" d="M0 0h640v480H0z"/>
+                        <path fill="#ffdf00" d="M320 40 590 240 320 440 50 240z"/>
+                        <circle cx="320" cy="240" r="105" fill="#002776"/>
+                        <path fill="#fff" d="M216 230a105 105 0 0 0 208 20 105 105 0 0 1-208-20z"/>
+                    </svg>
+                    <span>Português</span>
+                </button>
+
+                <button class="lang-btn" onclick="setLang('es')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#c60b1e" d="M0 0h640v480H0z"/>
+                        <path fill="#ffc400" d="M0 120h640v240H0z"/>
+                    </svg>
+                    <span>Español</span>
+                </button>
+
+                <button class="lang-btn" onclick="setLang('fr')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#002395" d="M0 0h213.3v480H0z"/>
+                        <path fill="#fff" d="M213.3 0h213.4v480H213.3z"/>
+                        <path fill="#ed2939" d="M426.7 0H640v480H426.7z"/>
+                    </svg>
+                    <span>Français</span>
+                </button>
+
+                <button class="lang-btn" onclick="setLang('de')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#000" d="M0 0h640v160H0z"/>
+                        <path fill="#d00" d="M0 160h640v160H0z"/>
+                        <path fill="#ffce00" d="M0 320h640v160H0z"/>
+                    </svg>
+                    <span>Deutsch</span>
+                </button>
+
+                <button class="lang-btn" onclick="setLang('it')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#009246" d="M0 0h213.3v480H0z"/>
+                        <path fill="#fff" d="M213.3 0h213.4v480H213.3z"/>
+                        <path fill="#ce2b37" d="M426.7 0H640v480H426.7z"/>
+                    </svg>
+                    <span>Italiano</span>
+                </button>
+
+                <button class="lang-btn" onclick="setLang('ru')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#fff" d="M0 0h640v160H0z"/>
+                        <path fill="#0039a6" d="M0 160h640v160H0z"/>
+                        <path fill="#d52b1e" d="M0 320h640v160H0z"/>
+                    </svg>
+                    <span>Русский</span>
+                </button>
+
+                <button class="lang-btn" onclick="setLang('ar')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#007a3d" d="M0 0h640v160H0z"/>
+                        <path fill="#fff" d="M0 160h640v160H0z"/>
+                        <path fill="#000" d="M0 320h640v160H0z"/>
+                        <path fill="#c8102e" d="M0 0l240 240L0 480z"/>
+                    </svg>
+                    <span>العربية</span>
+                </button>
+            </div>
+
+            <button class="modal-close" onclick="fecharPopups()">Close / Fechar</button>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-btn active">
+            <div class="nav-icon-wrap">
+                <svg class="svg-icon" viewBox="0 0 24 24">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+            </div>
+            <span>Home</span>
+        </a>
+
+        <div class="nav-btn" onclick="abrirPopupLang()">
+            <div class="nav-icon-wrap">
+                <svg class="svg-icon" viewBox="0 0 24 24">
+                    <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+                </svg>
+            </div>
+            <span>Language</span>
+        </div>
+    </nav>
+
+    <!-- TRANSLATE SCRIPT -->
+    <div id="google_translate_element" style="display:none;"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                { pageLanguage: 'en', autoDisplay: false },
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- JAVASCRIPT DOS JOGOS -->
+    <script src="jogos.js"></script>
+
+    <script>
+        let detectedGPU = "GENERIC";
+        let currentGame = null;
+        let isShowingAllGpus = false;
+
+        function setLang(l) {
+            sessionStorage.setItem('lang-selected', 'true');
+            const combo = document.querySelector('.goog-te-combo');
+            if (combo) {
+                combo.value = l;
+                combo.dispatchEvent(new Event('change'));
+                fecharPopups();
+            } else {
+                document.cookie = `googtrans=/en/${l}; path=/;`;
+                document.cookie = `googtrans=/en/${l}; domain=.${location.hostname}; path=/;`;
+                location.reload();
+            }
+        }
+
+        function abrirPopupLang() {
+            document.getElementById('popup-lang').style.display = 'flex';
+        }
+
+        function fecharPopups() {
+            document.getElementById('popup-lang').style.display = 'none';
+        }
+
+        /* ALTERNA ENTRE MOSTRAR/OCULTAR OUTRAS GPUS */
+        function toggleOtherGpus() {
+            const box = document.getElementById('links-box');
+            const btn = document.getElementById('btn-toggle-gpus');
+            isShowingAllGpus = !isShowingAllGpus;
+
+            if (isShowingAllGpus) {
+                box.classList.add('show-all-gpus');
+                if (btn) btn.innerHTML = `
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;">
+                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 12.5c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                    </svg>
+                    <span>Ocultar outras GPUs / Hide other GPUs</span>
+                `;
+            } else {
+                box.classList.remove('show-all-gpus');
+                if (btn) btn.innerHTML = `
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;">
+                        <path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.44-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>
+                    </svg>
+                    <span>Mostrar outras GPUs / Show all GPUs</span>
+                `;
+            }
+        }
+
+        /* 1. DETECÇÃO DAS 4 GPUS: ADRENO, MALI, POWERVR, TEGRA */
+        function detectHardwareAndInitDownloads(game) {
+            const btn = document.getElementById('btn-main');
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            const btnSpinner = document.getElementById('btn-spinner');
+            const progressBar = document.getElementById('btn-progress');
+            const gpuTagText = document.getElementById('gpu-tag-text');
+
+            let renderer = "";
+            try {
+                const canvas = document.createElement('canvas');
+                const gl = canvas.getContext('webgl2') || 
+                           canvas.getContext('webgl', { powerPreference: "high-performance" }) || 
+                           canvas.getContext('experimental-webgl');
+
+                if (gl) {
+                    const debug = gl.getExtension('WEBGL_debug_renderer_info');
+                    if (debug) {
+                        renderer = gl.getParameter(debug.UNMASKED_RENDERER_WEBGL) || "";
+                    }
+                    if (!renderer) {
+                        renderer = gl.getParameter(gl.RENDERER) || "";
+                    }
+                }
+            } catch (e) {
+                renderer = "";
+            }
+
+            const ua = (navigator.userAgent || "").toUpperCase();
+            let rawInfo = (renderer + " " + ua).toUpperCase();
+
+            // Mapeamento preciso das 4 GPUs
+            if (rawInfo.includes("ADRENO") || rawInfo.includes("QUALCOMM") || rawInfo.includes("SNAPDRAGON")) {
+                detectedGPU = "ADRENO";
+            } else if (
+                rawInfo.includes("MALI") || 
+                rawInfo.includes("BIFROST") || 
+                rawInfo.includes("VALHALL") || 
+                rawInfo.includes("IMMORTALIS") ||
+                rawInfo.includes("DIMENSITY") ||
+                rawInfo.includes("EXYNOS") ||
+                rawInfo.includes("HELIO") ||
+                rawInfo.includes("MEDIATEK")
+            ) {
+                detectedGPU = "MALI";
+            } else if (rawInfo.includes("POWERVR") || rawInfo.includes("ROGUE") || rawInfo.includes("SGX") || rawInfo.includes("IMG")) {
+                detectedGPU = "POWERVR";
+            } else if (rawInfo.includes("TEGRA") || rawInfo.includes("NVIDIA") || rawInfo.includes("SHIELD") || rawInfo.includes("GEFORCE")) {
+                detectedGPU = "TEGRA";
+            } else {
+                detectedGPU = "GENERIC";
+            }
+
+            const cleanDisplay = renderer 
+                ? renderer.replace(/ANGLE \((.*)\)/, '$1').replace(/(OpenGL ES .*|Direct3D.*)/, '').trim() 
+                : (detectedGPU !== "GENERIC" ? detectedGPU : "Mobile GPU");
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                progressBar.style.width = progress + '%';
+
+                if (progress === 40) {
+                    btnText.innerText = 'Analyzing GPU...';
+                } else if (progress === 70) {
+                    btnText.innerText = 'Configuring files...';
+                }
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    
+                    document.getElementById('my-gpu').innerText = cleanDisplay || "Mobile GPU";
+                    gpuTagText.innerText = (detectedGPU !== "GENERIC") ? "GPU: " + detectedGPU : "GPU DETECTED";
+
+                    btn.classList.remove('detecting');
+                    btnSpinner.style.display = 'none';
+                    btnIcon.style.display = 'inline-block';
+                    btnText.innerText = 'Download';
+                    progressBar.style.width = '0%';
+
+                    renderDownloadLinks(game);
+                }
+            }, 45);
+        }
+
+        
+        /* 2. RENDERIZAÇÃO DOS LINKS */
+        function renderDownloadLinks(game) {
+            const box = document.getElementById('links-box');
+            box.innerHTML = '';
+            const downloads = (game && game.downloads) ? game.downloads : [];
+            const gpuTypes = ['ADRENO', 'MALI', 'POWERVR', 'TEGRA'];
+
+            const gameHasGpuOptions = downloads.some(dl => {
+                const name = (dl.name || '').toUpperCase();
+                return gpuTypes.some(gpu => name.includes(gpu));
+            });
+
+            const hasCompatibleGpu = (detectedGPU !== 'GENERIC') && downloads.some(dl => {
+                return (dl.name || '').toUpperCase().includes(detectedGPU);
+            });
+
+            let hasBlurredItems = false;
+
+            // Se o jogo tem divisões por GPU e o aparelho NÃO é compatível
+            if (gameHasGpuOptions && !hasCompatibleGpu && detectedGPU !== 'GENERIC') {
+                box.innerHTML += `
+                    <div class="gpu-warning-box">
+                        <svg class="svg-icon" style="color:var(--accent-red); margin-top:2px;" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg>
+                        <div>
+                            <div class="gpu-warning-title">GPU Incompatible / Incompatível</div>
+                            <div class="gpu-warning-desc">
+                                Sua GPU detectada é <b>${detectedGPU}</b>, mas este jogo não possui versão compatível disponível. Você pode desbloquear abaixo para baixar manualmente por sua conta e risco.
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            downloads.forEach(dl => {
+                const titleUpper = (dl.name || '').toUpperCase();
+                
+                const isGpuSpecific = gpuTypes.some(gpu => titleUpper.includes(gpu));
+                const isMyGpu = (detectedGPU !== 'GENERIC' && titleUpper.includes(detectedGPU));
+                
+                const isSubtitle = titleUpper.includes('LEGENDA') || 
+                                   titleUpper.includes('SUBTITLE') || 
+                                   titleUpper.includes('TRADU') || 
+                                   titleUpper.includes('PATCH') ||
+                                   titleUpper.includes('PORTUGU');
+
+                let cardClass = '';
+                let badgeHtml = '';
+                let subText = dl.size || 'Fast Server';
+
+                if (isMyGpu) {
+                    cardClass = 'card-recommended';
+                    badgeHtml = `<span class="badge-tag badge-recommended">★ Compatible with your GPU (${detectedGPU})</span>`;
+                    subText = `${dl.size || 'Fast Download'} • 100% Tested`;
+                } else if (isSubtitle) {
+                    cardClass = 'card-subtitle';
+                    badgeHtml = `<span class="badge-tag badge-subtitle">⚡ Subtitle / Translation</span>`;
+                    subText = dl.size || 'Extra Content';
+                } else if (isGpuSpecific && detectedGPU !== 'GENERIC') {
+                    cardClass = 'card-blurred';
+                    hasBlurredItems = true;
+                    badgeHtml = `<span class="badge-tag badge-blocked">Other GPU</span>`;
+                    subText = `Requires another GPU (${dl.size || ''})`;
+                }
+
+                box.innerHTML += `
+                    <div class="link-card ${cardClass}">
+                        <div>
+                            ${badgeHtml}
+                            <div class="link-name">${dl.name}</div>
+                            <div class="link-tag">${subText}</div>
+                        </div>
+                        <a href="${dl.url}" target="_blank" class="download-btn-link" style="${isSubtitle ? 'background:var(--accent-pink); color:#fff;' : ''}">
+                            <svg class="svg-icon" style="width:14px; height:14px;" viewBox="0 0 24 24">
+                                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                            </svg>
+                            <span>Get</span>
+                        </a>
+                    </div>
+                `;
+            });
+
+            // Se existirem itens bloqueados, adiciona o botão de alternância
+            if (hasBlurredItems) {
+                box.innerHTML += `
+                    <button class="toggle-gpus-btn" id="btn-toggle-gpus" onclick="toggleOtherGpus()">
+                        <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;">
+                            <path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.44-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>
+                        </svg>
+                        <span>Mostrar outras GPUs / Show all GPUs</span>
+                    </button>
+                `;
+            }
+        }
+
+        /* 3. PROCESSAMENTO AO CLICAR EM DOWNLOAD */
+        function triggerDL() {
+            const btn = document.getElementById('btn-main');
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            const btnSpinner = document.getElementById('btn-spinner');
+            const progressBar = document.getElementById('btn-progress');
+            const hub = document.getElementById('download-hub');
+
+            if (btn.classList.contains('detecting') || btn.classList.contains('loading')) return;
+
+            btn.classList.add('loading');
+            btnIcon.style.display = 'none';
+            btnSpinner.style.display = 'inline-block';
+            btnText.innerText = 'Checking compatibility...';
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 5;
+                progressBar.style.width = progress + '%';
+
+                if (progress === 40) {
+                    btnText.innerText = 'Matching ' + (detectedGPU !== 'GENERIC' ? detectedGPU : 'GPU') + '...';
+                } else if (progress === 75) {
+                    btnText.innerText = 'Generating links...';
+                }
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    btn.classList.remove('loading');
+                    btnSpinner.style.display = 'none';
+                    btnIcon.style.display = 'inline-block';
+                    btnText.innerText = '✓ Links Ready!';
+                    progressBar.style.width = '0%';
+
+                    hub.style.display = 'block';
+                    hub.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 35);
+        }
+
+        function main() {
+            if (!sessionStorage.getItem('lang-selected')) {
+                abrirPopupLang();
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+
+            const allGames = (typeof games !== 'undefined' && Array.isArray(games)) 
+                ? games 
+                : (typeof jogos !== 'undefined' && Array.isArray(jogos)) 
+                    ? jogos 
+                    : [];
+
+            currentGame = allGames.find(g => g.id === id) || allGames[0];
+
+            if (currentGame) {
+                document.getElementById('g-title').innerText = currentGame.title || 'Game Details';
+                document.getElementById('g-img').src = currentGame.image || '';
+                document.getElementById('g-desc').innerText = currentGame.description || 'No description available.';
+                
+                const req = currentGame.requirements || {};
+                document.getElementById('g-size').innerText = req.storage || currentGame.size || '1.5 GB';
+                document.getElementById('g-android').innerText = (req.android ? req.android + '+' : 'Android 8.0+');
+                document.getElementById('req-android').innerText = (req.android ? req.android + '+' : '8.0+');
+                document.getElementById('req-ram').innerText = req.ram || '4 GB';
+
+                /* GAMEPLAY / TRAILER */
+                if (currentGame.youtubeId) {
+                    const mediaSection = document.getElementById('media-section');
+                    const trailerBox = document.createElement('div');
+                    trailerBox.className = 'video-wrapper';
+                    trailerBox.innerHTML = `
+                        <div class="video-tag">
+                            <svg class="svg-icon" style="width:16px; height:16px; color:var(--accent);" viewBox="0 0 24 24">
+                                <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/>
+                            </svg>
+                            <span>Gameplay / Trailer</span>
+                        </div>
+                        <iframe src="https://www.youtube.com/embed/${currentGame.youtubeId}" allowfullscreen></iframe>
+                    `;
+                    mediaSection.prepend(trailerBox);
+                }
+
+                detectHardwareAndInitDownloads(currentGame);
+
+                /* RELATED GAMES */
+                const relBox = document.getElementById('rel-box');
+                const related = allGames.filter(g => g.id !== currentGame.id).sort(() => 0.5 - Math.random()).slice(0, 6);
+                
+                relBox.innerHTML = related.map(r => `
+                    <div class="rel-card" onclick="location.href='jogo.html?id=${r.id}'">
+                        <img src="${r.image}" alt="${r.title}">
+                        <div class="rel-name">${r.title}</div>
+                    </div>
+                `).join('');
+            }
+        }
+    </script>
+</body>
+</html>

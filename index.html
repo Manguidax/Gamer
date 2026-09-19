@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mangui Dx Hub</title>
+
+    <style>
+        :root {
+            --bg-main: #0a0d14;
+            --bg-card: #131924;
+            --bg-card-hover: #1b2332;
+            --border: #202b3c;
+            --accent: #00ff88;
+            --pill-active: rgba(0, 255, 136, 0.15);
+            --text-main: #ffffff;
+            --text-sub: #8292a6;
+            --yt-red: #ff3333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-main);
+            padding-bottom: 85px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fix para evitar que a barra do Google Translate tape o topo */
+        .goog-te-banner-frame.skiptranslate {
+            display: none !important;
+        }
+        body {
+            top: 0px !important;
+        }
+        .goog-text-highlight {
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .svg-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .flag-svg {
+            width: 24px;
+            height: 16px;
+            border-radius: 3px;
+            flex-shrink: 0;
+            box-shadow: 0 0 3px rgba(0,0,0,0.4);
+            display: inline-block;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: rgba(10, 13, 20, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand-title {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .header-btn:active {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* SUB BAR / CHIPS */
+        .sub-nav {
+            display: flex;
+            gap: 8px;
+            padding: 12px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .sub-nav::-webkit-scrollbar { display: none; }
+
+        .chip {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-sub);
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .chip.active {
+            background: var(--bg-card-hover);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* BANNER CAROUSEL */
+        .slider-wrap {
+            padding: 0 16px 16px 16px;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+
+        .slide-item {
+            min-width: 100%;
+            height: 180px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .slide-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+        }
+
+        .slide-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 14px;
+            background: linear-gradient(0deg, rgba(10, 13, 20, 0.95) 0%, transparent 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .slide-info h4 {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .badge-tag {
+            background: var(--accent);
+            color: #000;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        /* SECTION TITLES */
+        .section-header {
+            padding: 12px 16px 6px 16px;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-sub);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-header::before {
+            content: '';
+            width: 4px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* APP LIST */
+        .app-list {
+            padding: 0 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .app-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 10px 12px;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .app-card:hover {
+            border-color: var(--accent);
+        }
+
+        .app-card img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: var(--bg-card-hover);
+        }
+
+        .app-meta {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .app-title {
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .app-subtitle {
+            font-size: 11px;
+            color: var(--text-sub);
+            margin-top: 3px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-action {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        /* HORIZONTAL TOP CARDS (7 ITENS) */
+        .cards-scroll {
+            display: flex;
+            gap: 10px;
+            padding: 4px 16px 16px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .cards-scroll::-webkit-scrollbar { display: none; }
+
+        .mini-card {
+            min-width: 110px;
+            max-width: 110px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .mini-card img {
+            width: 100%;
+            height: 95px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .mini-card .mini-title {
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* EXPLORE & CATEGORIES */
+        .explore-page {
+            display: none;
+            padding: 16px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 8px 14px;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .search-box input {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 14px;
+            outline: none;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .cat-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .cat-item-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* CHANNEL VIEW */
+        .channel-page {
+            display: none;
+            padding: 16px;
+        }
+
+        .profile-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            margin-bottom: 16px;
+        }
+
+        .profile-img {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .profile-info h3 {
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .profile-info p {
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-top: 3px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-yt {
+            background: var(--yt-red);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* MODAL */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+        }
+
+        .modal-body {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            width: 88%;
+            max-width: 380px;
+            border-radius: 18px;
+            padding: 20px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lang-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .lang-btn {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .modal-close {
+            margin-top: 14px;
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        /* BOTTOM NAV */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 64px;
+            background: rgba(10, 13, 20, 0.96);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-sub);
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .nav-icon-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 26px;
+            border-radius: 13px;
+            transition: 0.2s;
+        }
+
+        .nav-btn.active .nav-icon-wrap {
+            background: var(--pill-active);
+            color: var(--accent);
+        }
+
+        .nav-btn.active {
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand-title">Mangui Dx</div>
+        <div class="header-actions">
+            <button class="header-btn" onclick="openResults('Catalog', getCurrentList())">
+                <svg class="svg-icon" viewBox="0 0 24 24">
+                    <path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/>
+                </svg>
+                <span>Catalog</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- VIEW: HOME (GAMES / MOVIES) -->
+    <main id="view-home">
+        <div class="sub-nav">
+            <button class="chip active" onclick="renderSection()">Featured</button>
+            <button class="chip" id="filter-btn" onclick="showFilter('platform')">Platforms</button>
+            <button class="chip" onclick="openLanguages()">
+                <svg class="svg-icon" style="width:16px; height:16px;" viewBox="0 0 24 24">
+                    <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+                </svg>
+                <span>Language</span>
+            </button>
+        </div>
+
+        <div class="slider-wrap">
+            <div class="slider-container" id="slider"></div>
+        </div>
+
+        <!-- 1. JOGOS RECENTES (ÚLTIMOS ADICIONADOS) -->
+        <div class="section-header">Recently Added</div>
+        <div class="app-list" id="recent-list"></div>
+
+        <!-- 2. RECOMENDADOS (4 ALEATÓRIOS) -->
+        <div class="section-header" style="margin-top: 14px;">Recommended</div>
+        <div class="app-list" id="main-list"></div>
+
+        <!-- 3. TOP CHARTS (7 ALEATÓRIOS) -->
+        <div class="section-header" style="margin-top: 14px;">Top Charts</div>
+        <div class="cards-scroll" id="pop-list"></div>
+    </main>
+
+    <!-- VIEW: EXPLORE & SEARCH -->
+    <section id="view-explore" class="explore-page">
+        <div class="search-box">
+            <svg class="svg-icon" style="color:var(--text-sub);" viewBox="0 0 24 24">
+                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+            <input type="text" id="search-field" placeholder="Search games, movies..." onkeyup="if(event.key==='Enter') search(this.value)">
+        </div>
+        <div class="section-header" style="padding-left:0;">Categories</div>
+        <div class="category-grid" id="category-grid"></div>
+    </section>
+
+    <!-- VIEW: CHANNEL PROFILE -->
+    <section id="view-channel" class="channel-page">
+        <div class="profile-card" onclick="window.open('https://youtube.com/@manguidx')">
+            <img src="https://yt3.ggpht.com/JI30vxXKg5LWla1W1eLlRHcaOF_a9QQpew4KTrrIe15wL_XZbK27qKeWIeBZjhzaFMDfbm77=s160-c-k-c0x00ffffff-no-rj" class="profile-img" alt="Mangui Dx">
+            <div class="profile-info">
+                <h3>Mangui Dx</h3>
+                <p>
+                    <span>@manguidx • Ver canal</span>
+                    <svg class="svg-icon" style="width:14px; height:14px;" viewBox="0 0 24 24">
+                        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                    </svg>
+                </p>
+            </div>
+        </div>
+
+        <div id="yt-video-wrap"></div>
+
+        <button class="btn-yt" onclick="window.open('https://youtube.com/@manguidx')">
+            <svg class="svg-icon" viewBox="0 0 24 24">
+                <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/>
+            </svg>
+            Subscribe on YouTube
+        </button>
+    </section>
+
+    <!-- RESULTS MODAL -->
+    <div id="res-modal" class="overlay">
+        <div class="modal-body">
+            <h3 id="res-title" style="font-size:14px; margin-bottom:12px;">Results</h3>
+            <div id="res-content" style="overflow-y:auto; flex:1; display:flex; flex-direction:column; gap:8px;"></div>
+            <button class="modal-close" onclick="closeModals()">Close</button>
+        </div>
+    </div>
+
+    <!-- LANGUAGE POPUP MODAL COM BANDEIRAS SVG VETORIAIS -->
+    <div id="lang-modal" class="overlay">
+        <div class="modal-body">
+            <h3 style="font-size:15px; margin-bottom:4px; font-weight:800;">Choose Language</h3>
+            <p style="font-size:12px; color:var(--text-sub); margin-bottom:12px;">Select your preferred language / Selecione o idioma</p>
+            <div class="lang-grid">
+                <!-- ENGLISH -->
+                <button class="lang-btn" onclick="setLang('en')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#012169" d="M0 0h640v480H0z"/>
+                        <path fill="#FFF" d="m75 0 245 180L565 0h75v60L435 240l205 180v60h-75L320 300 75 480H0v-60l205-180L0 60V0h75z"/>
+                        <path fill="#C8102E" d="m424 288 216 158v34h-46L378 318zm141-288L354 158l22 30 240-176h-51zM0 446l216-158-22-30L0 412v34zm0-412L216 192l22-30L46 0H0v34z"/>
+                        <path fill="#FFF" d="M240 0h160v480H240zM0 160h640v160H0z"/>
+                        <path fill="#C8102E" d="M280 0h80v480h-80zM0 200h640v80H0z"/>
+                    </svg>
+                    <span>English</span>
+                </button>
+
+                <!-- PORTUGUÊS -->
+                <button class="lang-btn" onclick="setLang('pt')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#009c3b" d="M0 0h640v480H0z"/>
+                        <path fill="#ffdf00" d="M320 40 590 240 320 440 50 240z"/>
+                        <circle cx="320" cy="240" r="105" fill="#002776"/>
+                        <path fill="#fff" d="M216 230a105 105 0 0 0 208 20 105 105 0 0 1-208-20z"/>
+                    </svg>
+                    <span>Português</span>
+                </button>
+
+                <!-- ESPAÑOL -->
+                <button class="lang-btn" onclick="setLang('es')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#c60b1e" d="M0 0h640v480H0z"/>
+                        <path fill="#ffc400" d="M0 120h640v240H0z"/>
+                    </svg>
+                    <span>Español</span>
+                </button>
+
+                <!-- FRANÇAIS -->
+                <button class="lang-btn" onclick="setLang('fr')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#002395" d="M0 0h213.3v480H0z"/>
+                        <path fill="#fff" d="M213.3 0h213.4v480H213.3z"/>
+                        <path fill="#ed2939" d="M426.7 0H640v480H426.7z"/>
+                    </svg>
+                    <span>Français</span>
+                </button>
+
+                <!-- DEUTSCH -->
+                <button class="lang-btn" onclick="setLang('de')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#000" d="M0 0h640v160H0z"/>
+                        <path fill="#d00" d="M0 160h640v160H0z"/>
+                        <path fill="#ffce00" d="M0 320h640v160H0z"/>
+                    </svg>
+                    <span>Deutsch</span>
+                </button>
+
+                <!-- ITALIANO -->
+                <button class="lang-btn" onclick="setLang('it')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#009246" d="M0 0h213.3v480H0z"/>
+                        <path fill="#fff" d="M213.3 0h213.4v480H213.3z"/>
+                        <path fill="#ce2b37" d="M426.7 0H640v480H426.7z"/>
+                    </svg>
+                    <span>Italiano</span>
+                </button>
+
+                <!-- RUSSIAN -->
+                <button class="lang-btn" onclick="setLang('ru')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#fff" d="M0 0h640v160H0z"/>
+                        <path fill="#0039a6" d="M0 160h640v160H0z"/>
+                        <path fill="#d52b1e" d="M0 320h640v160H0z"/>
+                    </svg>
+                    <span>Русский</span>
+                </button>
+
+                <!-- ARABIC -->
+                <button class="lang-btn" onclick="setLang('ar')">
+                    <svg class="flag-svg" viewBox="0 0 640 480">
+                        <path fill="#007a3d" d="M0 0h640v160H0z"/>
+                        <path fill="#fff" d="M0 160h640v160H0z"/>
+                        <path fill="#000" d="M0 320h640v160H0z"/>
+                        <path fill="#c8102e" d="M0 0l240 240L0 480z"/>
+                    </svg>
+                    <span>العربية</span>
+                </button>
+            </div>
+            <button class="modal-close" onclick="closeModals()">Close / Fechar</button>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" id="tab-games" onclick="switchTab('games')">
+            <div class="nav-icon-wrap">
+                <svg class="svg-icon" viewBox="0 0 24 24">
+                    <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                </svg>
+            </div>
+            <span>Games</span>
+        </button>
+
+        <button class="nav-btn" id="tab-movies" onclick="switchTab('movies')">
+            <div class="nav-icon-wrap">
+                <svg class="svg-icon" viewBox="0 0 24 24">
+                    <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/>
+                </svg>
+            </div>
+            <span>Movies</span>
+        </button>
+
+        <button class="nav-btn" id="tab-explore" onclick="switchTab('explore')">
+            <div class="nav-icon-wrap">
+                <svg class="svg-icon" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </div>
+            <span>Search</span>
+        </button>
+
+        <button class="nav-btn" id="tab-channel" onclick="switchTab('channel')">
+            <div class="nav-icon-wrap">
+                <svg class="svg-icon" viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+            </div>
+            <span>Channel</span>
+        </button>
+    </nav>
+
+    <!-- GOOGLE TRANSLATE -->
+    <div id="google_translate_element" style="display:none;"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- DADOS EXTERNOS -->
+    <script src="jogos.js"></script>
+    <script src="filmes.js"></script>
+
+    <script>
+        let currentTab = 'games';
+        let sliderIdx = 0;
+        let sliderTimer;
+
+        const defaultGames = [
+            { id: "spiderman2", title: "Spider-Man 2", platform: "PS5", category: "Action", image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400" },
+            { id: "carsfast", title: "Cars: Fast Track", platform: "Android", category: "Racing", image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400" },
+            { id: "oddworld", title: "Oddworld Soulstorm", platform: "PC", category: "Adventure", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400" },
+            { id: "blockblast", title: "Block Blast", platform: "Android", category: "Puzzle", image: "https://images.unsplash.com/photo-1580234811497-9df7fd2f357e?w=400" },
+            { id: "subwaysurfers", title: "Subway Surfers", platform: "Android", category: "Arcade", image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400" },
+            { id: "gow", title: "God of War", platform: "PS5", category: "Action", image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=400" },
+            { id: "fifa", title: "EA Sports FC", platform: "PS5", category: "Sports", image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=400" },
+            { id: "cyberpunk", title: "Cyberpunk 2077", platform: "PC", category: "RPG", image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400" },
+            { id: "minecraft", title: "Minecraft", platform: "Android", category: "Adventure", image: "https://images.unsplash.com/photo-1627856013091-fed6e4e30025?w=400" },
+            { id: "gta5", title: "GTA V", platform: "PC", category: "Action", image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400" },
+            { id: "roblox", title: "Roblox", platform: "Android", category: "Adventure", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400" },
+            { id: "freefire", title: "Free Fire", platform: "Android", category: "Action", image: "https://images.unsplash.com/photo-1542751110-97427bbecf20?w=400" },
+            { id: "codm", title: "Call of Duty Mobile", platform: "Android", category: "Action", image: "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=400" },
+            { id: "asphalt", title: "Asphalt 9", platform: "Android", category: "Racing", image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400" }
+        ];
+
+        const defaultMovies = [
+            { id: "avengers", title: "Avengers: Secret Wars", quality: "4K", category: "Action", image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400" },
+            { id: "interstellar", title: "Interstellar", quality: "1080p", category: "Sci-Fi", image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=400" },
+            { id: "batman", title: "The Batman", quality: "4K", category: "Action", image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=400" },
+            { id: "avatar", title: "Avatar: Way of Water", quality: "4K", category: "Sci-Fi", image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400" },
+            { id: "spiderman", title: "Spider-Man No Way Home", quality: "1080p", category: "Action", image: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400" }
+        ];
+
+        const youtubeVideos = [
+            { id: "CtvMlBuVnuY", title: "Spider-Man 2" },
+            { id: "m3ZYASNe2mE", title: "Cars Fast" },
+            { id: "AOpGdgE4yVA", title: "Oddworld" }
+        ];
+
+        const categoryIcons = {
+            "action": '<svg class="svg-icon" style="color:var(--accent);" viewBox="0 0 24 24"><path d="M14.5 2.5L13 4l6 6 1.5-1.5c.78-.78.78-2.05 0-2.83l-3.17-3.17c-.78-.78-2.05-.78-2.83 0zM3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/></svg>',
+            "racing": '<svg class="svg-icon" style="color:var(--accent);" viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg>',
+            "adventure": '<svg class="svg-icon" style="color:var(--accent);" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>',
+            "puzzle": '<svg class="svg-icon" style="color:var(--accent);" viewBox="0 0 24 24"><path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7 1.49 0 2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5c1.38 0 2.5-1.12 2.5-2.5s-1.12-2.5-2.5-2.5z"/></svg>',
+            "arcade": '<svg class="svg-icon" style="color:var(--accent);" viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>',
+            "sports": '<svg class="svg-icon" style="color:var(--accent);" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93z"/></svg>',
+            "default": '<svg class="svg-icon" style="color:var(--accent);" viewBox="0 0 24 24"><path d="M12 2l-5.5 9h11z M12 22l5.5-9h-11z"/></svg>'
+        };
+
+        function getCurrentList() {
+            if (currentTab === 'movies') {
+                if (typeof movies !== 'undefined' && Array.isArray(movies) && movies.length > 0) return movies;
+                if (typeof filmes !== 'undefined' && Array.isArray(filmes) && filmes.length > 0) return filmes;
+                return defaultMovies;
+            }
+            if (typeof games !== 'undefined' && Array.isArray(games) && games.length > 0) return games;
+            if (typeof jogos !== 'undefined' && Array.isArray(jogos) && jogos.length > 0) return jogos;
+            return defaultGames;
+        }
+
+        function getItemLink(item) {
+            return currentTab === 'movies' ? `filmes.html?id=${item.id}` : `jogo.html?id=${item.id}`;
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('view-home').style.display = 'none';
+            document.getElementById('view-explore').style.display = 'none';
+            document.getElementById('view-channel').style.display = 'none';
+
+            if (tab === 'games' || tab === 'movies') {
+                currentTab = tab;
+                document.getElementById(`tab-${tab}`).classList.add('active');
+                document.getElementById('view-home').style.display = 'block';
+                document.getElementById('filter-btn').innerText = (tab === 'movies') ? 'Quality' : 'Platforms';
+                renderSection();
+            } else if (tab === 'explore') {
+                document.getElementById('tab-explore').classList.add('active');
+                document.getElementById('view-explore').style.display = 'block';
+                renderCategories();
+            } else if (tab === 'channel') {
+                document.getElementById('tab-channel').classList.add('active');
+                document.getElementById('view-channel').style.display = 'block';
+                renderYTVideo();
+            }
+        }
+
+        function renderSection() {
+            const list = getCurrentList();
+            const slider = document.getElementById('slider');
+            const recentList = document.getElementById('recent-list');
+            const mainList = document.getElementById('main-list');
+            const popList = document.getElementById('pop-list');
+
+            slider.innerHTML = '';
+            recentList.innerHTML = '';
+            mainList.innerHTML = '';
+            popList.innerHTML = '';
+
+            if (sliderTimer) clearInterval(sliderTimer);
+
+            if (!list || list.length === 0) {
+                mainList.innerHTML = `<p style="text-align:center; color:var(--text-sub); padding:20px;">No items found.</p>`;
+                return;
+            }
+
+            // 1. RECENTLY ADDED (Últimos 3 itens cadastrados na ordem inversa)
+            const recentItems = [...list].reverse().slice(0, 3);
+            recentList.innerHTML = recentItems.map(item => `
+                <div class="app-card" onclick="location.href='${getItemLink(item)}'">
+                    <img src="${item.image}" alt="${item.title}">
+                    <div class="app-meta">
+                        <div class="app-title">${item.title}</div>
+                        <div class="app-subtitle">
+                            <span style="color:var(--accent); font-weight:800;">NEW</span>
+                            <span>•</span>
+                            <span>${item.platform || item.category || 'HD'}</span>
+                        </div>
+                    </div>
+                    <button class="btn-action">${currentTab === 'movies' ? 'Watch' : 'Get'}</button>
+                </div>
+            `).join('');
+
+            // Embaralha para preencher Slider, Recommended e Top Charts sem duplicações
+            const pool = [...list].sort(() => 0.5 - Math.random());
+
+            // 2. SLIDER (3 itens aleatórios)
+            const sliderItems = pool.slice(0, Math.min(3, pool.length));
+            sliderItems.forEach(item => {
+                const tag = item.platform || item.quality || item.year || 'HD';
+                slider.innerHTML += `
+                    <div class="slide-item" onclick="location.href='${getItemLink(item)}'">
+                        <img src="${item.image}" class="slide-img" alt="${item.title}">
+                        <div class="slide-info">
+                            <h4>${item.title}</h4>
+                            <span class="badge-tag">${tag}</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            sliderIdx = 0;
+            slider.style.transform = 'translateX(0%)';
+            if (sliderItems.length > 1) {
+                sliderTimer = setInterval(() => {
+                    sliderIdx = (sliderIdx + 1) % sliderItems.length;
+                    slider.style.transform = `translateX(-${sliderIdx * 100}%)`;
+                }, 4500);
+            }
+
+            // 3. RECOMMENDED (Exatamente 4 itens aleatórios)
+            const remainingAfterSlider = pool.slice(3);
+            const recommendedPool = remainingAfterSlider.length >= 4 ? remainingAfterSlider : pool;
+            const recommendedItems = recommendedPool.slice(0, 4);
+
+            mainList.innerHTML = recommendedItems.map(item => `
+                <div class="app-card" onclick="location.href='${getItemLink(item)}'">
+                    <img src="${item.image}" alt="${item.title}">
+                    <div class="app-meta">
+                        <div class="app-title">${item.title}</div>
+                        <div class="app-subtitle">${item.platform || item.category || 'Popular'}</div>
+                    </div>
+                    <button class="btn-action">${currentTab === 'movies' ? 'Watch' : 'Get'}</button>
+                </div>
+            `).join('');
+
+            // 4. TOP CHARTS (Exatamente 7 itens aleatórios)
+            const remainingAfterRec = pool.slice(7);
+            const popPool = remainingAfterRec.length >= 7 ? remainingAfterRec : pool;
+            const popItems = popPool.slice(0, 7);
+
+            popList.innerHTML = popItems.map(item => `
+                <div class="mini-card" onclick="location.href='${getItemLink(item)}'">
+                    <img src="${item.image}" alt="${item.title}">
+                    <div class="mini-title">${item.title}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderCategories() {
+            const list = getCurrentList();
+            const cats = [...new Set(list.map(i => i.category || i.genre).filter(Boolean))];
+            const container = document.getElementById('category-grid');
+
+            if (cats.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-sub);">No categories available.</p>';
+                return;
+            }
+
+            container.innerHTML = cats.map(c => {
+                const key = c.toLowerCase();
+                const iconSvg = categoryIcons[key] || categoryIcons['default'];
+
+                return `
+                    <div class="cat-item" onclick="filterBy('category', '${c}')">
+                        <div class="cat-item-left">
+                            ${iconSvg}
+                            <span>${c}</span>
+                        </div>
+                        <svg class="svg-icon" style="width:14px; height:14px; color:var(--text-sub);" viewBox="0 0 24 24">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openResults(title, items) {
+            const modal = document.getElementById('res-modal');
+            const titleEl = document.getElementById('res-title');
+            const contentEl = document.getElementById('res-content');
+
+            titleEl.innerText = title;
+            contentEl.innerHTML = '';
+
+            if (!items || items.length === 0) {
+                contentEl.innerHTML = '<p style="color:var(--text-sub); text-align:center; padding:10px;">No items found.</p>';
+            } else {
+                contentEl.innerHTML = items.map(item => `
+                    <div class="app-card" onclick="location.href='${getItemLink(item)}'">
+                        <img src="${item.image}" alt="${item.title}">
+                        <div class="app-meta">
+                            <div class="app-title">${item.title}</div>
+                            <div class="app-subtitle">${item.platform || item.category || ''}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            modal.style.display = 'flex';
+        }
+
+        function search(query) {
+            if (!query) return;
+            const list = getCurrentList();
+            const filtered = list.filter(i => 
+                i.title.toLowerCase().includes(query.toLowerCase()) ||
+                (i.category && i.category.toLowerCase().includes(query.toLowerCase())) ||
+                (i.platform && i.platform.toLowerCase().includes(query.toLowerCase()))
+            );
+            openResults(`Search: "${query}"`, filtered);
+        }
+
+        function showFilter(type) {
+            const list = getCurrentList();
+            const keys = [...new Set(list.map(i => i[type]).filter(Boolean))];
+            const modal = document.getElementById('res-modal');
+            const titleEl = document.getElementById('res-title');
+            const contentEl = document.getElementById('res-content');
+
+            titleEl.innerText = `Select ${type.toUpperCase()}`;
+            contentEl.innerHTML = keys.map(k => `
+                <button class="lang-btn" style="width:100%; margin-bottom:8px;" onclick="filterBy('${type}', '${k}')">${k}</button>
+            `).join('');
+            modal.style.display = 'flex';
+        }
+
+        function filterBy(type, value) {
+            const list = getCurrentList();
+            const filtered = list.filter(i => (i[type] || i.genre) === value);
+            openResults(value, filtered);
+        }
+
+        function openLanguages() {
+            document.getElementById('lang-modal').style.display = 'flex';
+        }
+
+        function setLang(code) {
+            sessionStorage.setItem('lang_selected', 'true');
+            const combo = document.querySelector('.goog-te-combo');
+            if (combo) {
+                combo.value = code;
+                combo.dispatchEvent(new Event('change'));
+            } else {
+                document.cookie = `googtrans=/en/${code}; path=/;`;
+                document.cookie = `googtrans=/en/${code}; domain=.${location.hostname}; path=/;`;
+                location.reload();
+            }
+            closeModals();
+        }
+
+        function closeModals() {
+            document.querySelectorAll('.overlay').forEach(m => m.style.display = 'none');
+        }
+
+        function renderYTVideo() {
+            const wrap = document.getElementById('yt-video-wrap');
+            if (youtubeVideos.length > 0) {
+                const vid = youtubeVideos[Math.floor(Math.random() * youtubeVideos.length)];
+                wrap.innerHTML = `
+                    <iframe 
+                        width="100%" 
+                        height="190" 
+                        style="border-radius:14px; border:none;" 
+                        src="https://www.youtube.com/embed/${vid.id}" 
+                        title="${vid.title}" 
+                        allowfullscreen>
+                    </iframe>
+                `;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderSection();
+            if (!sessionStorage.getItem('lang_selected')) {
+                openLanguages();
+            }
+        });
+    </script>
+</body>
+</html>
