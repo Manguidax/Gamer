@@ -1,24 +1,23 @@
 /* =====================================================
    MANGUI D'DAX GAMER HUB - BANCO DE DADOS OFICIAL
-   Suporta: Múltiplos Downloads, GPUs e Informações
+   Suporta: MÃºltiplos Downloads, GPUs e InformaÃ§Ãµes
 ===================================================== */
 
 const games = [
-
-    /* 01 - LIFE IS STRANGE */
+/* 01 - LIFE IS STRANGE */
 {
     id: "life-is-strange",
     title: "Life is Strange",
     platform: "Android",
-    category: "Aventura",
+    category: "Adventure",
     image: "images/life-is-strange.jpg",
-    description: "Aventura narrativa baseada em escolhas.",
+    description: "Experience a story-driven adventure where your choices shape the journey. Play as Max Caulfield, a photography student who discovers she can rewind time and use this mysterious ability to change events around her. Explore the town of Arcadia Bay, meet different characters, investigate secrets, and make decisions that can have lasting consequences. With an emotional story, memorable characters, exploration, and a unique time-rewind mechanic, Life is Strange offers an interactive experience where the way you play can influence how the story unfolds.",
     requirements: {
         storage: "1.2GB",
         ram: "3 GB+",
         system: "Android 9+"
     },
-    info: "Compatibilidade depende do dispositivo. CPU: Octa-Core. GPU compatível. Idioma: Português conforme a versão.",
+    info: "Compatibility depends on the device. CPU: Octa-Core. Compatible GPU required. Language: Portuguese depending on the game version.",
     downloads: [
         { name: "Android APK", url: "https://direct-link.net/1275086/AYmeqO8ncujq" }
     ]
@@ -28,51 +27,50 @@ const games = [
 {
     id: "walking-dead-season-two-legendado",
     title: "The Walking Dead: Season Two",
-    subtitle: "Versão antiga • Legendado em Português",
+    subtitle: "Old Version â€¢ Portuguese Subtitles",
     platform: "Android",
-    category: "Aventura",
+    category: "Adventure",
     image: "images/walking-dead-season-two.jpg",
-    description: "Segunda temporada da aventura narrativa de The Walking Dead.",
+    description: "Continue Clementine's journey in the second season of the acclaimed narrative adventure series. In a world where survival is never guaranteed, your decisions can influence relationships, conversations, and the events that follow. Explore different locations, interact with survivors, discover new characters, and face difficult situations where there may be no easy choice. This version is designed for older Android devices and includes Portuguese subtitles, allowing Portuguese-speaking players to follow the story and dialogue more easily.",
     requirements: {
         storage: "780MB",
         ram: "1 GB+",
-        system: "Android abaixo de 14"
+        system: "Android below 14"
     },
-    info: "Destinada principalmente para versões antigas do Android. CPU: Dual-Core 1.2 GHz. GPU compatível. Idioma: Português legendado.",
+    info: "Primarily intended for older Android versions. CPU: Dual-Core 1.2 GHz. Compatible GPU required. Language: Portuguese subtitles.",
     downloads: [
-        { name: "LEGENDAS PT-BR v1.35", url: "https://drive.google.com/file/d/19XL984CZ3wjwtKzyvAIXjhoDD1uRKxLj/view?usp=drivesdk" },
-        { name: "GPU ADRENO APK", url: "https://link-center.net/1275086/pSTUoEPfS8BL" },
-        { name: "GPU ADRENO OBB", url: "https://link-hub.net/1275086/9hwAXCxSAsrM" },
-        { name: "GPU MALI APK", url: "https://link-center.net/1275086/B91x18AuRNLK" },
-        { name: "GPU MALI OBB", url: "https://direct-link.net/1275086/JkSw87z3B9fT" },
-        { name: "GPU POWERVR APK", url: "https://link-center.net/1275086/yjJcHd6hRMed" },
-        { name: "GPU POWERVR OBB", url: "https://link-hub.net/1275086/2L321AKRPL4x" },
-        { name: "GPU TEGRA APK", url: "https://link-hub.net/1275086/fkBmF42VauSw" },
-        { name: "GPU TEGRA OBB", url: "https://link-target.net/1275086/8upz4R1Bzq6K" }
+        { name: "PT-BR SUBTITLES v1.35", url: "https://drive.google.com/file/d/19XL984CZ3wjwtKzyvAIXjhoDD1uRKxLj/view?usp=drivesdk" },
+        { name: "ADRENO GPU APK", url: "https://link-center.net/1275086/pSTUoEPfS8BL" },
+        { name: "ADRENO GPU OBB", url: "https://link-hub.net/1275086/9hwAXCxSAsrM" },
+        { name: "MALI GPU APK", url: "https://link-center.net/1275086/B91x18AuRNLK" },
+        { name: "MALI GPU OBB", url: "https://direct-link.net/1275086/JkSw87z3B9fT" },
+        { name: "POWERVR GPU APK", url: "https://link-center.net/1275086/yjJcHd6hRMed" },
+        { name: "POWERVR GPU OBB", url: "https://link-hub.net/1275086/2L321AKRPL4x" },
+        { name: "TEGRA GPU APK", url: "https://link-hub.net/1275086/fkBmF42VauSw" },
+        { name: "TEGRA GPU OBB", url: "https://link-target.net/1275086/8upz4R1Bzq6K" }
     ]
 },
 
-/* 03 - THE WALKING DEAD SEASON TWO (ATUALIZADO) */
+/* 03 - THE WALKING DEAD SEASON TWO (UPDATED) */
 {
     id: "walking-dead-season-two-atualizado",
-    title: "The Walking Dead: Season Two Atualizado",
-    subtitle: "Versão atualizada",
+    title: "The Walking Dead: Season Two Updated",
+    subtitle: "Updated Version",
     platform: "Android",
-    category: "Aventura",
+    category: "Adventure",
     image: "images/walking-dead-season-two-updated.jpg",
-    description: "Versão atualizada da segunda temporada.",
+    description: "Continue Clementine's story in this updated version of The Walking Dead: Season Two. Experience a narrative adventure focused on survival, exploration, character relationships, and meaningful decisions. Your actions can influence conversations and events as you travel through a dangerous world filled with unpredictable situations. Meet other survivors, explore different environments, and make difficult choices while following Clementine's journey. This version is intended for newer Android versions and does not include Portuguese subtitles.",
     requirements: {
         storage: "1GB",
         ram: "1 GB+",
         system: "Android 14 / 15 / 16"
     },
-    info: "Compatibilidade depende do aparelho e da versão. CPU: Dual-Core ou superior. GPU compatível conforme versão. Sem legendas em português.",
+    info: "Compatibility depends on the device and Android version. CPU: Dual-Core or higher. Compatible GPU required depending on the version. No Portuguese subtitles.",
     downloads: [
-        { name: "GPU MALI APK", url: "https://direct-link.net/1275086/xjjrlU8UPVrn" },
-        { name: "GPU ADRENO APK", url: "https://link-center.net/1275086/j1vgefEAPuZC" }
+        { name: "MALI GPU APK", url: "https://direct-link.net/1275086/xjjrlU8UPVrn" },
+        { name: "ADRENO GPU APK", url: "https://link-center.net/1275086/j1vgefEAPuZC" }
     ]
 },
-
 /* =================================================
    04 - THE AMAZING SPIDER-MAN 2
 ================================================= */
@@ -84,35 +82,35 @@ const games = [
 
     platform: "Android",
 
-    category: "Acao",
+    category: "Action",
 
     image:
         "images/amazing-spiderman-2.jpg",
 
     description:
-        "Jogo de acao baseado no universo do Spider-Man.",
+        "Swing through the streets of New York as Spider-Man in this action-packed open-world adventure. Explore the city, fight criminals, complete missions, and use Spider-Man's abilities to move freely across the urban environment. Take on powerful enemies, investigate events throughout the city, and experience an adventure inspired by The Amazing Spider-Man 2 universe. With web-swinging, fast-paced combat, exploration, and a variety of missions, the game delivers a superhero experience designed for mobile devices.",
 
     requirements: {
         android: "6+",
         ram: "1GB",
-        cpu: "compativel",
-        gpu: "GPU especifica conforme versao",
+        cpu: "Compatible",
+        gpu: "Specific GPU depending on version",
         storage: "680MB"
     },
 
     info:
-        "Compatibilidade pode variar conforme a versao. Idioma: Portugues, ingles, espanhol e outros.",
+        "Compatibility may vary depending on the version and device. Languages: Portuguese, English, Spanish, and others.",
 
     downloads: [
         {
-            name: "PASSWORD/SENHA",
+            name: "Password Is HardTECH",
             type: "HardTECH",
             url: "#"
         },
 
         {
             name: "APK+OBB",
-            type: "COMPACTO",
+            type: "COMPACT",
             url: "https://direct-link.net/1275086/nfTV0yj52z8q"
         }
     ]
@@ -120,7 +118,7 @@ const games = [
 
 
 /* =================================================
-   05 - LIFE IS STRANGE BEFORE THE STORM
+   05 - LIFE IS STRANGE: BEFORE THE STORM
 ================================================= */
 
 {
@@ -130,24 +128,24 @@ const games = [
 
     platform: "Android",
 
-    category: "Aventura",
+    category: "Adventure",
 
     image:
         "images/life-is-strange-before-the-storm.jpg",
 
     description:
-        "Aventura narrativa ambientada antes de Life is Strange.",
+        "Discover the story that takes place before the events of Life is Strange. Play as Chloe Price and experience a narrative-driven adventure focused on friendship, relationships, exploration, and difficult choices. Explore different locations, interact with characters, uncover personal stories, and make decisions that can influence the way the story develops. With an emotional narrative and a strong focus on character relationships, Before the Storm offers a story-centered experience for players who enjoy interactive adventures.",
 
     requirements: {
         android: "Android 9+",
         ram: "3 GB+",
         cpu: "Octa-Core",
-        gpu: "GPU compativel",
+        gpu: "Compatible GPU",
         storage: "1.2GB"
     },
 
     info:
-        "Jogo relativamente exigente para Android. Idioma: Portugues, Ingles e Espanhol.",
+        "Relatively demanding game for Android devices. Languages: Portuguese, English, and Spanish.",
 
     downloads: [
         {
@@ -170,24 +168,24 @@ const games = [
 
     platform: "Android",
 
-    category: "Corrida",
+    category: "Racing",
 
     image:
         "images/nfs-most-wanted.jpg",
 
     description:
-        "Corridas, carros e perseguicoes policiais.",
+        "Get behind the wheel and experience high-speed street racing in Need for Speed: Most Wanted. Race through the city, compete against rival drivers, unlock and customize powerful cars, and escape intense police pursuits. Build your reputation by winning races and taking on increasingly challenging opponents. With fast-paced gameplay, a wide selection of cars, detailed environments, and exciting police chases, this mobile version delivers an arcade-style racing experience focused on speed and action.",
 
     requirements: {
         android: "5+",
         ram: "1GB",
-        cpu: "compativel",
-        gpu: "GPU compativel",
+        cpu: "Compatible",
+        gpu: "Compatible GPU",
         storage: "690MB"
     },
 
     info:
-        "Compatibilidade varia conforme dispositivo e versao. Idioma: Portugues, Ingles e Espanhol.",
+        "Compatibility varies depending on the device and version. Languages: Portuguese, English, and Spanish.",
 
     downloads: [
         {
@@ -218,29 +216,29 @@ const games = [
 
     platform: "Android",
 
-    category: "Acao",
+    category: "Action",
 
     image:
         "images/red-dead-redemption.jpg",
 
     description:
-        "Aventura de mundo aberto no universo de Red Dead Redemption.",
+        "Experience an open-world western adventure set in the world of Red Dead Redemption. Explore vast landscapes, travel through towns and wilderness, interact with characters, and take part in missions across a detailed frontier environment. Follow the story of John Marston as he travels across the American frontier, facing dangerous situations and meeting different characters along the way. With exploration, action, storytelling, and an expansive open world, the mobile version brings the western adventure to compatible Android devices.",
 
     requirements: {
-        android: "Consultar versao oficial",
-        ram: "Consultar",
-        cpu: "Alto desempenho recomendado",
-        gpu: "GPU de alto desempenho",
-        storage: "Consultar"
+        android: "Check official version",
+        ram: "Check",
+        cpu: "High-performance hardware recommended",
+        gpu: "High-performance GPU",
+        storage: "Check"
     },
 
     info:
-        "Requer hardware compativel. Idioma: Portugues, Espanhol e Ingles.",
+        "Requires compatible hardware. Languages: Portuguese, Spanish, and English.",
 
     downloads: [
         {
             name: "Android",
-            type: "Oficial",
+            type: "Official",
             url: "#"
         }
     ]
@@ -679,7 +677,7 @@ const games = [
             url: "https://direct-link.net/1275086/p4vYJLPN6h9O"
         },
         {
-            name: " IMPORTANT: OBB DOWNLOAD EXPIRES IN 7 DAYS — IF THE LINK EXPIRES, LEAVE A COMMENT ON THE CHANNEL REQUESTING AN UPDATE — GPU ADRENO OBB",
+            name: " IMPORTANT: OBB DOWNLOAD EXPIRES IN 7 DAYS â€” IF THE LINK EXPIRES, LEAVE A COMMENT ON THE CHANNEL REQUESTING AN UPDATE â€” GPU ADRENO OBB",
             url: "https://5play.org/en/?do=cdn&id=23098p"
         },
 
@@ -688,7 +686,7 @@ const games = [
             url: "https://direct-link.net/1275086/p4vYJLPN6h9O"
         },
         {
-            name: " IMPORTANT: OBB DOWNLOAD EXPIRES IN 7 DAYS — IF THE LINK EXPIRES, LEAVE A COMMENT ON THE CHANNEL REQUESTING AN UPDATE — GPU MALI OBB",
+            name: " IMPORTANT: OBB DOWNLOAD EXPIRES IN 7 DAYS â€” IF THE LINK EXPIRES, LEAVE A COMMENT ON THE CHANNEL REQUESTING AN UPDATE â€” GPU MALI OBB",
             url: "https://5play.org/en/?do=cdn&id=23098"
         },
 
@@ -697,7 +695,7 @@ const games = [
             url: "https://direct-link.net/1275086/p4vYJLPN6h9O"
         },
         {
-            name: " IMPORTANT: OBB DOWNLOAD EXPIRES IN 7 DAYS — IF THE LINK EXPIRES, LEAVE A COMMENT ON THE CHANNEL REQUESTING AN UPDATE — GPU POWERVR OBB",
+            name: " IMPORTANT: OBB DOWNLOAD EXPIRES IN 7 DAYS â€” IF THE LINK EXPIRES, LEAVE A COMMENT ON THE CHANNEL REQUESTING AN UPDATE â€” GPU POWERVR OBB",
             url: "https://5play.org/en/?do=cdn&id=23098"
         },
 
@@ -706,7 +704,7 @@ const games = [
             url: "https://direct-link.net/1275086/p4vYJLPN6h9O"
         },
         {
-            name: " IMPORTANT: OBB DOWNLOAD EXPIRES IN 7 DAYS — IF THE LINK EXPIRES, LEAVE A COMMENT ON THE CHANNEL REQUESTING AN UPDATE — GPU TEGRA OBB",
+            name: " IMPORTANT: OBB DOWNLOAD EXPIRES IN 7 DAYS â€” IF THE LINK EXPIRES, LEAVE A COMMENT ON THE CHANNEL REQUESTING AN UPDATE â€” GPU TEGRA OBB",
             url: "https://5play.org/en/?do=cdn&id=23098"
         }
     ]
@@ -2809,7 +2807,7 @@ const games = [
     },
 
     info:
-        "Hijacker Jack: Famous. Rich. Wanted. é um jogo de ação FMV com uma história interativa onde suas escolhas influenciam o caminho do personagem. Compatibilidade pode variar conforme o dispositivo. Idiomas: ingles e outros.",
+        "Hijacker Jack: Famous. Rich. Wanted. Ã© um jogo de aÃ§Ã£o FMV com uma histÃ³ria interativa onde suas escolhas influenciam o caminho do personagem. Compatibilidade pode variar conforme o dispositivo. Idiomas: ingles e outros.",
 
     downloads: [
         {
@@ -2847,7 +2845,7 @@ const games = [
     },
 
     info:
-        "God of War Mobile Edition é uma versão desenvolvida pela FAM inspirada na famosa franquia God of War. Em dispositivos Android atuais, o jogo pode funcionar melhor utilizando o VPhoneOS para maior compatibilidade e desempenho. Compatibilidade pode variar conforme o dispositivo. Idiomas: ingles e outros.",
+        "God of War Mobile Edition Ã© uma versÃ£o desenvolvida pela FAM inspirada na famosa franquia God of War. Em dispositivos Android atuais, o jogo pode funcionar melhor utilizando o VPhoneOS para maior compatibilidade e desempenho. Compatibilidade pode variar conforme o dispositivo. Idiomas: ingles e outros.",
 
     downloads: [
         {
@@ -2885,7 +2883,7 @@ const games = [
     },
 
     info:
-        "Gangstar Rio: City of Saints é um jogo de mundo aberto desenvolvido pela Gameloft, ambientado no Rio de Janeiro. Explore a cidade, participe de missões, combates e perseguições em uma grande aventura criminal. Compatibilidade pode variar conforme o dispositivo. Idiomas: Portugues, ingles, espanhol e outros.",
+        "Gangstar Rio: City of Saints Ã© um jogo de mundo aberto desenvolvido pela Gameloft, ambientado no Rio de Janeiro. Explore a cidade, participe de missÃµes, combates e perseguiÃ§Ãµes em uma grande aventura criminal. Compatibilidade pode variar conforme o dispositivo. Idiomas: Portugues, ingles, espanhol e outros.",
 
     downloads: [
         {
@@ -2929,7 +2927,7 @@ const games = [
     },
 
     info:
-        "Spider-Man Unlimited é um jogo de ação e corrida infinita desenvolvido pela Gameloft. Controle o Homem-Aranha em uma aventura contra vilões clássicos, desbloqueie diferentes versões do personagem e enfrente desafios em vários cenários. Compatibilidade pode variar conforme o dispositivo. Idiomas: Portugues, ingles, espanhol e outros.",
+        "Spider-Man Unlimited Ã© um jogo de aÃ§Ã£o e corrida infinita desenvolvido pela Gameloft. Controle o Homem-Aranha em uma aventura contra vilÃµes clÃ¡ssicos, desbloqueie diferentes versÃµes do personagem e enfrente desafios em vÃ¡rios cenÃ¡rios. Compatibilidade pode variar conforme o dispositivo. Idiomas: Portugues, ingles, espanhol e outros.",
 
     downloads: [
         {
@@ -4047,20 +4045,20 @@ This tutorial is intended to help players install and use the classic version of
 
 This version may have some limitations:
 
-• Offline functionality only.
-• No new updates.
-• No online events.
-• Features that depend on online servers may not work.
-• Compatibility may vary depending on the device.
+â€¢ Offline functionality only.
+â€¢ No new updates.
+â€¢ No online events.
+â€¢ Features that depend on online servers may not work.
+â€¢ Compatibility may vary depending on the device.
 
 REQUIREMENTS
 
-• ZArchiver or another compatible file manager is recommended.
-• Follow the installation tutorial carefully.
-• Android 8 through Android 16 may be supported depending on the device and game build.
-• An ARM64-v8a device is recommended.
-• 32-bit devices may have compatibility issues.
-• Do not rename or move the required "data" folder after installation.
+â€¢ ZArchiver or another compatible file manager is recommended.
+â€¢ Follow the installation tutorial carefully.
+â€¢ Android 8 through Android 16 may be supported depending on the device and game build.
+â€¢ An ARM64-v8a device is recommended.
+â€¢ 32-bit devices may have compatibility issues.
+â€¢ Do not rename or move the required "data" folder after installation.
 
 Language: Portuguese, Spanish and English.
 `,
