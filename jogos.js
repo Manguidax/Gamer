@@ -103,9 +103,9 @@ const games = [
 
     downloads: [
         {
-            name: "Password Is HardTECH",
+            name: "Password Is (HardTECH)",
             type: "HardTECH",
-            url: "#"
+            url: "HardTECH"
         },
 
         {
