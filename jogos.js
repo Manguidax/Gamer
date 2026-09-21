@@ -4148,4 +4148,72 @@ Language: Portuguese, Spanish and English.
         }
     ]
 },
+   /* =================================================
+   94 - TALES FROM THE BORDERLANDS
+================================================= */
+
+{
+    id: "tales-from-the-borderlands-android-multi-gpu",
+
+    title: "Tales from the Borderlands",
+
+    subtitle: "Android - Multi GPU Edition",
+
+    platform: "Android",
+
+    category: "Adventure",
+
+    image:
+        "images/tales-from-the-borderlands.jpg",
+
+    description:
+        "Tales from the Borderlands is a story-driven adventure game developed by Telltale Games and set in the Borderlands universe. Follow Rhys and Fiona through an unpredictable journey filled with choices, dialogue, action and memorable characters. This edition includes versions for different Android GPU architectures, with the APK and OBB data combined into a single file for each GPU.",
+
+    requirements: {
+        android: "Android 6.0+",
+        ram: "2GB+",
+        cpu: "Quad-Core 1.5GHz+",
+        gpu: "Adreno, Mali, PowerVR or Tegra",
+        storage: "3GB+"
+    },
+
+    info:
+        "This edition includes separate versions for Adreno, Mali, PowerVR and Tegra GPUs. Each GPU version is provided as a single file containing both the APK and OBB data. Choose the version matching your device's GPU. If the automatic GPU detection does not identify your GPU correctly, use the options to show other GPUs or all available versions.",
+
+    language:
+        "English",
+
+    gpuDownloads: {
+        adreno: "LINK_ADRENO",
+        mali: "LINK_MALI",
+        powervr: "LINK_POWERVR",
+        tegra: "LINK_TEGRA"
+    },
+
+    downloads: [
+        {
+            name: "GPU ADRENO - APK + OBB",
+            type: "APK + OBB",
+            url: "https://direct-link.net/1275086/Y9pCFVdys8PQ"
+        },
+
+        {
+            name: "GPU MALI - APK + OBB",
+            type: "APK + OBB",
+            url: "https://direct-link.net/1275086/KgOpupgB9A44"
+        },
+
+        {
+            name: "GPU POWERVR - APK + OBB",
+            type: "APK + OBB",
+            url: "https://link-target.net/1275086/UwQMTocOehDl"
+        },
+
+        {
+            name: "GPU TEGRA - APK + OBB",
+            type: "APK + OBB",
+            url: "https://link-target.net/1275086/ISwXBuVkZuCU"
+        }
+    ]
+},
 ];
