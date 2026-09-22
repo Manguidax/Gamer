@@ -4216,4 +4216,47 @@ Language: Portuguese, Spanish and English.
         }
     ]
 },
+  /* =================================================
+   95 - BATMAN: THE TELLTALE SERIES
+================================================= */
+
+{
+    id: "batman-the-telltale-series-android-14",
+
+    title: "Batman: The Telltale Series",
+
+    subtitle: "Android 14 - APK + OBB",
+
+    platform: "Android",
+
+    category: "Adventure",
+
+    image:
+        "images/batman-the-telltale-series.jpg",
+
+    description:
+        "Batman: The Telltale Series is a story-driven adventure from Telltale Games that puts you in the role of Bruce Wayne and Batman. Make important choices, interact with familiar characters, investigate situations and shape the story through your decisions. This version is adapted for newer Android systems, including Android 14.",
+
+    requirements: {
+        android: "Android 6.0+",
+        ram: "2GB+",
+        cpu: "Quad-Core 1.5GHz+",
+        gpu: "Adreno, Mali, PowerVR or Tegra",
+        storage: "3GB+"
+    },
+
+    info:
+        "This version is adapted for Android 14 and is compatible with different Android GPU architectures, including Adreno, Mali, PowerVR and Tegra. The APK and OBB data are included together in a single compressed file, so there is no need to download the APK and OBB separately. Download the complete package and follow the installation tutorial.",
+
+    language:
+        "English",
+
+    downloads: [
+        {
+            name: "BATMAN: THE TELLTALE SERIES - APK + OBB",
+            type: "APK + OBB",
+            url: "https://link-hub.net/1275086/Ilkrlcvrn2Hx"
+        }
+    ]
+},
 ];
