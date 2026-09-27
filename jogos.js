@@ -319,15 +319,11 @@ const games = [
     info: "Pode apresentar incompatibilidade em Android recente. Idioma: Ingles.",
     downloads: [
         {
-            name: "APK",
+            name: "APK+OBB",
             type: "APK",
-            url: "#"
+            url: "https://direct-link.net/1275086/pqcRciOkgSik"
         },
-        {
-            name: "OBB",
-            type: "OBB",
-            url: "#"
-        }
+      
     ]
 },
 
@@ -790,25 +786,25 @@ const games = [
 
     downloads: [
         {
-            name: "GPU POWERVR",
+            name: "GPU POWERVR APK",
             type: "APK",
             url: "https://direct-link.net/1275086/Fy83ELuCMldy"
         },
 
         {
-            name: "GPU POWERVR",
+            name: "GPU POWERVR OBB",
             type: "OBB",
             url: "https://link-center.net/1275086/Eu4ly8yDKFvf"
         },
 
         {
-            name: "GPU MALI",
+            name: "GPU MALI APK",
             type: "APK",
             url: "https://link-center.net/1275086/bdSDha1cmZbe"
         },
 
         {
-            name: "Dados",
+            name: "GPU MALI OBB",
             type: "OBB",
             url: "https://link-hub.net/1275086/uDZcJzOGVKln"
         }
