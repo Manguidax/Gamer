@@ -345,7 +345,7 @@ const games = [
     info: "Versao mais exigente graficamente. Idioma: Portugues, Espanhol e Ingles.",
     downloads: [
         {
-            name: "Android",
+            name: "GTA_SA APKS",
             type: "Oficial",
             url: "https://direct-link.net/1275086/4IjDCoKYjGcR"
         }
