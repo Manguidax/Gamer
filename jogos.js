@@ -4277,11 +4277,11 @@ Language: Portuguese, Spanish and English.
         "Batman: The Enemy Within is the second season of Telltale Games' Batman series. Bruce Wayne and Batman face dangerous new challenges as the Riddler returns to terrorize Gotham City. With a ruthless federal agent arriving and a new Joker emerging, Batman must navigate uneasy alliances while Bruce Wayne becomes involved in a dangerous game of deception. Your decisions shape the story, influence relationships and determine how far Bruce will descend into darkness. This release includes Episode 1 of the five-part season.",
 
     requirements: {
-        android: "Android 5.0+",
-        ram: "2GB+",
+        android: "Android 5.0",
+        ram: "4GB+",
         cpu: "Quad-Core 1.5GHz+",
         gpu: "NVIDIA Tegra K1/X1, Adreno 418/420/430/505/530, Mali-T760/T880 or NVIDIA Maxwell",
-        storage: "3GB+"
+        storage: "8GB+"
     },
 
     info:
@@ -4308,7 +4308,7 @@ Language: Portuguese, Spanish and English.
         },
         {
             name: "BATMAN: THE ENEMY WITHIN - SAVE DATA",
-            type: "SAVE DATA",
+            type: "SAVED DATA",
             url: "https://link-center.net/1275086/i5513jz6uHEj"
         }
     ]
