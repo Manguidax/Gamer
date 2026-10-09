@@ -4255,4 +4255,62 @@ Language: Portuguese, Spanish and English.
         }
     ]
 },
+   /* =================================================
+   96 - BATMAN: THE ENEMY WITHIN
+================================================= */
+
+{
+    id: "batman-the-enemy-within-android",
+
+    title: "Batman: The Enemy Within",
+
+    subtitle: "Android - APK + OBB + DATA + SAVE DATA",
+
+    platform: "Android",
+
+    category: "Adventure",
+
+    image:
+        "images/batman-the-enemy-within.jpg",
+
+    description:
+        "Batman: The Enemy Within is the second season of Telltale Games' Batman series. Bruce Wayne and Batman face dangerous new challenges as the Riddler returns to terrorize Gotham City. With a ruthless federal agent arriving and a new Joker emerging, Batman must navigate uneasy alliances while Bruce Wayne becomes involved in a dangerous game of deception. Your decisions shape the story, influence relationships and determine how far Bruce will descend into darkness. This release includes Episode 1 of the five-part season.",
+
+    requirements: {
+        android: "Android 5.0+",
+        ram: "2GB+",
+        cpu: "Quad-Core 1.5GHz+",
+        gpu: "NVIDIA Tegra K1/X1, Adreno 418/420/430/505/530, Mali-T760/T880 or NVIDIA Maxwell",
+        storage: "3GB+"
+    },
+
+    info:
+        "This version of Batman: The Enemy Within requires separate APK, OBB, DATA and SAVE DATA files. Download the required files and follow the installation instructions carefully. The SAVE DATA file may be necessary for accessing episodes, depending on the version. Supported GPUs include NVIDIA Tegra K1 and X1, Adreno 418, 420, 430, 505 and 530, Mali-T760 and T880, and NVIDIA Maxwell. Android 5.0 or later is listed as the minimum operating system requirement for this release. Actual compatibility may vary depending on the device.",
+
+    language:
+        "English",
+
+    downloads: [
+        {
+            name: "BATMAN: THE ENEMY WITHIN - APK",
+            type: "APK",
+            url: "https://link-center.net/1275086/jJ3UfjPGF5ly"
+        },
+        {
+            name: "BATMAN: THE ENEMY WITHIN - OBB",
+            type: "OBB",
+            url: "https://link-hub.net/1275086/r1ej7wa3bvKI"
+        },
+        {
+            name: "BATMAN: THE ENEMY WITHIN - DATA",
+            type: "DATA",
+            url: "https://link-hub.net/1275086/XnWeXMBQqT8t"
+        },
+        {
+            name: "BATMAN: THE ENEMY WITHIN - SAVE DATA",
+            type: "SAVE DATA",
+            url: "https://link-center.net/1275086/i5513jz6uHEj"
+        }
+    ]
+},
 ];
