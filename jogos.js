@@ -296,7 +296,7 @@ const games = [
         {
             name: "Android",
             type: "APK",
-            url: "https://direct-link.net/1275086/WTY060KTR7G3"
+            url: "https://link-hub.net/1275086/djtmJseVRT2d"
         }
     ]
 },
