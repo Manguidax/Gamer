@@ -340,14 +340,14 @@ const games = [
         ram: "6GB recomendado",
         cpu: "Alto desempenho",
         gpu: "GPU compativel",
-        storage: "7GB"
+        storage: "6.4GB"
     },
     info: "Versao mais exigente graficamente. Idioma: Portugues, Espanhol e Ingles.",
     downloads: [
         {
             name: "Android",
             type: "Oficial",
-            url: "https://link-hub.net/1275086/CBPOx88I5nmo"
+            url: "https://direct-link.net/1275086/4IjDCoKYjGcR"
         }
     ]
 },
