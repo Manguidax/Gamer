@@ -11,15 +11,26 @@ const games = [
     platform: "Android",
     category: "Adventure",
     image: "images/life-is-strange.jpg",
-    description: "Experience a story-driven adventure where your choices shape the journey. Play as Max Caulfield, a photography student who discovers she can rewind time and use this mysterious ability to change events around her. Explore the town of Arcadia Bay, meet different characters, investigate secrets, and make decisions that can have lasting consequences. With an emotional story, memorable characters, exploration, and a unique time-rewind mechanic, Life is Strange offers an interactive experience where the way you play can influence how the story unfolds.",
+
+    description: "Experience an emotional, story-driven adventure where your choices shape the journey. Play as Max Caulfield, a photography student who discovers she can rewind time and use this mysterious ability to change events. Explore Arcadia Bay, meet memorable characters, uncover secrets, and make decisions that can have lasting consequences. With cinematic storytelling, exploration, puzzles, and a unique time-rewind mechanic, Life is Strange delivers an interactive adventure where your choices influence the story.",
+
     requirements: {
-        storage: "1.2GB",
-        ram: "3 GB+",
-        system: "Android 9+"
+        storage: "5GB",
+        ram: "4GB+",
+        system: "Android 7.0"
     },
-    info: "Compatibility depends on the device. CPU: Octa-Core. Compatible GPU required. Language: Portuguese depending on the game version.",
+
+    info: "Platform: Android. Genre: Adventure. CPU: Octa-Core recommended. RAM: 4GB or more recommended. Storage: Approximately 5GB of free space. Android 7.0 or later recommended. Compatibility depends on the device, GPU, and game version. All episodes unlocked in this version, according to the provided information.",
+
     downloads: [
-        { name: "Android APK", url: "https://direct-link.net/1275086/AYmeqO8ncujq" }
+        {
+            name: "APK+OBB Download",
+            url: "https://link-hub.net/1275086/1enyo71agoJ7"
+        },
+        {
+            name: "UE4GAMES EP:2-5 Download",
+            url: "https://link-hub.net/1275086/X5uwlJ17Pf4f"
+        }
     ]
 },
 
