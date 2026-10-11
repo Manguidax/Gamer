@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin | Mangui Gamer Hub</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: #101114;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 380px;
+      padding: 28px;
+      background: #1b1c21;
+      border: 1px solid #34353d;
+      border-radius: 16px;
+    }
+
+    h1 { margin-top: 0; font-size: 24px; }
+    p { color: #aaa; line-height: 1.5; }
+
+    input, button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    input {
+      color: #fff;
+      background: #101114;
+      border: 1px solid #444;
+    }
+
+    button {
+      color: #fff;
+      background: #1685ff;
+      border: 0;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled { opacity: .6; }
+
+    #status {
+      margin-top: 16px;
+      overflow-wrap: anywhere;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Mangui Gamer Hub</h1>
+    <p>Painel de administração. Introduz a tua palavra-passe para iniciar sessão.</p>
+
+    <form id="loginForm">
+      <input
+        id="password"
+        type="password"
+        placeholder="Palavra-passe de administrador"
+        autocomplete="current-password"
+        required
+      >
+      <button id="loginButton" type="submit">Entrar</button>
+    </form>
+
+    <div id="status" role="status"></div>
+  </main>
+
+  <script>
+    const API = "https://mangui-gamer-admin.suporte-manguiddax.workers.dev";
+
+    const form = document.getElementById("loginForm");
+    const password = document.getElementById("password");
+    const button = document.getElementById("loginButton");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      button.disabled = true;
+      status.textContent = "A verificar...";
+      
+      try {
+        const response = await fetch(API + "/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: password.value })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          status.textContent = data.error || "Não foi possível iniciar sessão.";
+          return;
+        }
+
+        sessionStorage.setItem("mangui_admin_token", data.token);
+        status.textContent = "Login confirmado! A ligação ao painel funcionou.";
+      } catch (error) {
+        status.textContent = "Erro de ligação. Verifica o Worker e tenta novamente.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
