@@ -4324,4 +4324,47 @@ Language: Portuguese, Spanish and English.
         }
     ]
 },
+/* =================================================
+   97 - SIFU
+================================================= */
+
+{
+    id: "sifu-android",
+
+    title: "Sifu",
+
+    subtitle: "Android - APK (Additional Data Downloaded In-Game)",
+
+    platform: "Android",
+
+    category: "Action",
+
+    image:
+        "images/sifu-android.jpg",
+
+    description:
+        "Sifu is an action-packed martial arts fighting game developed by Sloclap. Follow the journey of a young martial artist seeking revenge against those responsible for his family's murder. Fight your way through dangerous locations filled with enemies, using precise combat, powerful combos, counters and a variety of martial arts techniques. Every mistake can have consequences, as your character ages when defeated, making each encounter a test of skill, timing and strategy. This Android version features mobile-focused touch controls, camera adjustments and controller compatibility. The game includes the revenge campaign, unlockable fighting techniques and increasingly challenging encounters. The APK file is approximately 1.3GB, while additional game data is downloaded from within the game.",
+
+    requirements: {
+        android: "Android 10",
+        ram: "4GB+ (Recommended)",
+        cpu: "ARM64 (64-bit)",
+        gpu: "Compatible with your device",
+        storage: "At least 5GB+ of free space"
+    },
+
+    info:
+        "This version of Sifu for Android requires only the APK file for installation. The APK is approximately 1.3GB, and additional game data must be downloaded from within the game after installation. No separate OBB or DATA files are required for the initial installation. The game is listed for Android 10 and ARM64 devices, but actual compatibility and performance may vary depending on your smartphone's processor, GPU, RAM and available storage. Make sure you have a stable internet connection and sufficient free storage before launching the game for the first time.",
+
+    language:
+        "English",
+
+    downloads: [
+        {
+            name: "SIFU - APK (1.3GB)",
+            type: "APK",
+            url: "https://link-hub.net/1275086/n9dAnfQvImvR"
+        }
+    ]
+},
 ];
