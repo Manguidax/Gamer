@@ -4367,4 +4367,48 @@ Language: Portuguese, Spanish and English.
         }
     ]
 },
+
+/* =================================================
+   98 - N.O.V.A. 3
+================================================= */
+
+{
+    id: "nova-3-android",
+
+    title: "N.O.V.A. 3: Near Orbit Vanguard Alliance",
+
+    subtitle: "Android - APK",
+
+    platform: "Android",
+
+    category: "Action / FPS",
+
+    image:
+        "images/nova-3-android.jpg",
+
+    description:
+        "N.O.V.A. 3: Near Orbit Vanguard Alliance is a sci-fi first-person shooter developed by Gameloft. Set in a futuristic world, the game follows humanity's struggle for survival against alien forces. Experience intense combat across different environments, using futuristic weapons, advanced technology and powerful equipment. Explore a cinematic campaign filled with action, challenging enemies and large-scale battles. The game also features a variety of weapons, vehicles and multiplayer combat.",
+
+    requirements: {
+        android: "Android 4.0+ (Original release requirement; compatibility may vary)",
+        ram: "2GB+ (Recommended)",
+        cpu: "ARM64 (64-bit)",
+        gpu: "Compatible with your device",
+        storage: "At least 2GB+ of free space"
+    },
+
+    info:
+        "This version of N.O.V.A. 3 is provided as an ARM64 APK file. The installation and compatibility may vary depending on your Android version, processor, GPU and device architecture. Make sure your smartphone has sufficient free storage before installation. The game may require additional resources or permissions depending on the version. Compatibility with modern Android devices is not guaranteed.",
+
+    language:
+        "English",
+
+    downloads: [
+        {
+            name: "N.O.V.A. 3 - APK (ARM64)",
+            type: "APK",
+            url: "https://dl.apkvision.org/n-o-v-a-3-near-orbit-vanguard-alliance/NOVA-3-near-orbit-vanguard-alliance-v1.0.7-ARM64-APKVision.apk"
+        }
+    ]
+},
 ];
